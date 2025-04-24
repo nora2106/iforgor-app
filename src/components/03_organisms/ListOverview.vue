@@ -26,8 +26,8 @@ const addNewList = (name: string) => {
       <p v-if="lists.length === 0">No lists available</p>
       <ul>
         <ListPreview v-for="list in lists" :key="list.id">
-          <router-link :to="'/lists/' + list.id">
-          {{list.name}}
+          <router-link :to="'/list/' + list.id">
+            {{list.name}}
           </router-link>
         </ListPreview>
       </ul>

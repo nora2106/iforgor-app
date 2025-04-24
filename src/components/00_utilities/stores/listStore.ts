@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import {computed, ref} from "vue";
-import type { ListItem, List } from '../types/list'
+import type { List } from '../types/list'
 
 export const useListStore = defineStore('list', () => {
     const lists = ref<List[]>([]);

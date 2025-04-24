@@ -1,43 +1,26 @@
-<!-- single task list component -->
+<!-- single list component -->
+<script setup lang="ts">
+  import TaskList from "@/components/02_molecules/TaskList.vue";
+  import {useRoute} from "vue-router";
+  import {useListStore} from "@/components/00_utilities/stores/listStore";
+
+  const route = useRoute();
+  const listID :number = parseInt(route.params.id.toString());
+  const store = useListStore();
+
+  const list = store.getListByID(listID)
+  let type = list?.type;
+</script>
+
 <template>
-  <h1>List</h1>
   <div v-if="type === 'task'">
-    <p>Tasks</p>
+    <p>Task-Liste</p>
     <TaskList :list="list"/>
   </div>
   <div v-if="type === 'shopping'">
     <p>Shopping list tba.</p>
   </div>
 </template>
-
-<script lang="ts">
-import {defineComponent, ref} from 'vue';
-import TaskList from "@/components/03_organisms/TaskList.vue";
-import {useRoute} from "vue-router";
-import {useListStore} from "@/components/00_utilities/stores/listStore";
-
-export default defineComponent({
-  name: 'ListView',
-  setup() {
-    // @todo make type dynamic
-    const route = useRoute();
-    const listID :number = parseInt(route.params.id.toString());
-    const store = useListStore();
-
-    const list = store.getListByID(listID)
-    let type = list?.type;
-
-    return {
-      type,
-      list
-    }
-  },
-  components: {
-    TaskList
-  }
-
-});
-</script>
 
 <style>
 
