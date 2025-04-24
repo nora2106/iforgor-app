@@ -109,4 +109,5 @@ export const useListStore = defineStore('list', () => {
         }
 
     }
+    return { lists, addList, addItemToList, deleteItem, toggleItemCompleted, editItem, addSubtask}
 })
