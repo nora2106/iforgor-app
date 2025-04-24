@@ -1,16 +1,17 @@
 <template>
-  <ListPage/>
+  <nav>
+    <router-link to="/">Go to Home</router-link>
+  </nav>
+  <main>
+    <router-view />
+  </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import MainPage from "@/components/05_pages/MainPage.vue";
 
 export default defineComponent({
   name: 'App',
-  components: {
-    ListPage: MainPage,
-  }
 });
 </script>
 

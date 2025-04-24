@@ -1,5 +1,6 @@
 <!-- main page of the app -->
 <template>
+  <h1>Homepage</h1>
   <ListSelectorWrapper/>
 </template>
 
