@@ -1,4 +1,14 @@
 <!-- single task list component -->
+<script setup lang="ts">
+import ListItem from "@/components/01_atoms/ListItem.vue";
+import type {List, TaskItem} from "../00_utilities/types/list";
+
+const props = defineProps<{ list: List }>();
+console.log(props.list)
+// const tasks = props.list;
+
+</script>
+
 <template>
   <h1>List name</h1>
   <p v-if="tasks.length === 0">No tasks available</p>
@@ -9,33 +19,6 @@
   </ul>
 </template>
 
-<script lang="ts">
-import {ref} from "vue";
-import { defineComponent } from 'vue';
-import ListItem from "@/components/01_atoms/ListItem.vue";
-
-interface Task {
-  id: number;
-  name: string;
-}
-
-export default defineComponent({
-  name: 'TaskList',
-  setup() {
-    const tasks = ref<Task[]>([
-      {id: 1, name: "Buying milk"},
-      {id: 2, name: "Second task"}
-    ])
-    return {
-      tasks
-    }
-  },
-  components: {
-    ListItem
-  }
-
-});
-</script>
 
 <style>
 

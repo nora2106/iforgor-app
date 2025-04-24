@@ -1,37 +1,23 @@
 <!-- component template -->
-<script lang="ts">
-import {defineComponent, ref, defineEmits} from 'vue';
-import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
+<script setup lang="ts">
+  import {ref} from "vue";
+  import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 
-export default defineComponent({
-  name: 'AddListOverlay',
-  props: {
-    close: Function,
-  },
-  emits: ['submit'],
-  setup(props, { emit }) {
-    let name = ref("");
-    let errorMessage = ref("");
-    const sendValue = () => {
-      if(name.value !== "") {
-        emit('submit', name.value);
-      }
-      else {
-        errorMessage.value = "Bitte gib einen Namen ein."
-      }
-    }
+  let name = ref("");
+  let errorMessage = ref("");
 
-    return {
-      sendValue,
-      name,
-      errorMessage
+  const emit = defineEmits<{
+    (e: 'submit', listName: string): void;
+  }>();
+
+  const sendValue = () => {
+    if(name.value !== "") {
+      emit('submit', name.value);
     }
-  },
-  components: {
-    ButtonIcon
+    else {
+      errorMessage.value = "Bitte gib einen Namen ein."
+    }
   }
-
-});
 </script>
 
 <template>

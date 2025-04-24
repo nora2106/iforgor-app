@@ -1,20 +1,9 @@
 <!-- single list item, can have different types -->
-<script lang="ts">
-import {defineComponent, ref} from 'vue';
+<script setup lang="ts">
+import {ref} from "vue";
 
-export default defineComponent({
-  name: 'ListItem',
-  setup() {
-    const isChecked = ref(false);
-    return {
-      isChecked
-    }
-  },
-  components: {
+const isChecked = ref(false);
 
-  }
-
-});
 </script>
 
 <template>

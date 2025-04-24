@@ -1,18 +1,6 @@
 <!-- single list item, can have different types -->
-<script lang="ts">
-import {defineComponent, ref} from 'vue';
+<script setup lang="ts">
 
-export default defineComponent({
-  name: 'ListItem',
-  setup() {
-    return {
-    }
-  },
-  components: {
-
-  }
-
-});
 </script>
 
 <template>

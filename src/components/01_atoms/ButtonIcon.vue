@@ -1,27 +1,12 @@
 <!-- round button with icon -->
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'ButtonIcon',
-  props: {
-    action: Function,
-  },
-  setup() {
-
-    return {
-
-    }
-  },
-  components: {
-
-  }
-
-});
+<script setup lang="ts">
+  const props = defineProps<{
+    action: () => void
+  }>();
 </script>
 
 <template>
-  <button @click="action()">
+  <button @click="props.action">
     <slot/>
   </button>
 </template>

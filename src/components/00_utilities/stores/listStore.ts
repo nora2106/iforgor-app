@@ -1,57 +1,26 @@
 import { defineStore } from 'pinia'
-import {ref} from "vue";
-import ListItem from "@/components/01_atoms/ListItem.vue";
-
-interface BaseListItem {
-    id: number;
-    type: 'task' | 'shopping';
-    completed: boolean;
-    text: string;
-    listID: number
-}
-
-interface SubTask {
-    id: number;
-    text: string,
-    completed: boolean;
-}
-
-interface TaskItem extends BaseListItem {
-    type: 'task';
-    dueDate?: string;
-    subtasks: SubTask[];
-}
-
-interface ShoppingItem extends BaseListItem {
-    type: 'shopping';
-    quantity?: number;
-    unit?: string;
-}
-
-type ListItem = TaskItem | ShoppingItem;
-
-interface List {
-    id: number;
-    type: 'task' | 'shopping';
-    name: string;
-    items: ListItem[];
-}
+import {computed, ref} from "vue";
+import type { ListItem, List } from '../types/list'
 
 export const useListStore = defineStore('list', () => {
     const lists = ref<List[]>([]);
 
+    // getters
+    const getListByID = computed(() => (listID: number) => lists.value.find(l => l.id === listID));
+    const getListCount = computed(() => (type: string) => lists.value.filter(l => l.type === type).length);
+
     // add new list of a certain type
-    const addList = (name: string, type: 'task' | 'shopping') => {
+    function addList(name: string, type: 'task' | 'shopping') {
         lists.value.push({
             id: Date.now(),
             name,
             items: [],
             type
         });
-    };
+    }
 
     // add new item to an existing list
-    const addItemToList = (listID: number, content: string) => {
+    function addItemToList (listID: number, content: string){
         const list = lists.value.find(l => l.id === listID);
         if (list) {
             list.items.push({
@@ -63,10 +32,10 @@ export const useListStore = defineStore('list', () => {
                 subtasks: []
             });
         }
-    };
+    }
 
     // delete certain item from a list
-    const deleteItem = (listID: number, itemID: number) => {
+    function deleteItem(listID: number, itemID: number){
         const list = lists.value.find(l => l.id === listID);
         const item = list?.items.find(i => i.id === itemID);
 
@@ -76,7 +45,7 @@ export const useListStore = defineStore('list', () => {
     }
 
     // toggle the item completion state
-    const toggleItemCompleted = (listID: number, itemID: number) => {
+    function toggleItemCompleted(listID: number, itemID: number){
         const list = lists.value.find(l => l.id === listID);
         const item = list?.items.find(i => i.id === itemID);
 
@@ -86,7 +55,7 @@ export const useListStore = defineStore('list', () => {
     }
 
     // edit the values of a certain list item
-    const editItem = (listID: number, itemID: number) => {
+    function editItem(listID: number, itemID: number){
         const list = lists.value.find(l => l.id === listID);
         const item = list?.items.find(i => i.id === itemID);
 
@@ -96,7 +65,7 @@ export const useListStore = defineStore('list', () => {
     }
 
     // add a subtask to a task item
-    const addSubtask = (listID: number, itemID: number, subtaskTitle: string) => {
+    function addSubtask(listID: number, itemID: number, subtaskTitle: string){
         const list = lists.value.find(l => l.id === listID);
         const taskItem = list?.items.find(i => i.id === itemID);
 
@@ -109,5 +78,6 @@ export const useListStore = defineStore('list', () => {
         }
 
     }
-    return { lists, addList, addItemToList, deleteItem, toggleItemCompleted, editItem, addSubtask}
+
+    return { lists, getListCount, getListByID, addList, addItemToList, deleteItem, toggleItemCompleted, editItem, addSubtask}
 })

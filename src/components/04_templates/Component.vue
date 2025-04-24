@@ -1,20 +1,6 @@
 <!-- component template -->
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 
-export default defineComponent({
-  name: 'Component',
-  setup() {
-
-    return {
-
-    }
-  },
-  components: {
-
-  }
-
-});
 </script>
 
 <template>

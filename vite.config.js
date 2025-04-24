@@ -9,8 +9,8 @@ export default defineConfig({
             registerType: 'autoUpdate',
             includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
             manifest: {
-                name: 'Iforgor App',
-                short_name: 'Iforgor',
+                name: 'iForgor',
+                short_name: 'iForgor',
                 start_url: '/',
                 display: 'standalone',
                 background_color: '#ffffff',

@@ -2,7 +2,8 @@
 <template>
   <h1>List</h1>
   <div v-if="type === 'task'">
-    <TaskList/>
+    <p>Tasks</p>
+    <TaskList :list="list"/>
   </div>
   <div v-if="type === 'shopping'">
     <p>Shopping list tba.</p>
@@ -10,15 +11,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import {defineComponent, ref} from 'vue';
 import TaskList from "@/components/03_organisms/TaskList.vue";
+import {useRoute} from "vue-router";
+import {useListStore} from "@/components/00_utilities/stores/listStore";
 
 export default defineComponent({
   name: 'ListView',
   setup() {
-    let type = "shopping"
+    // @todo make type dynamic
+    const route = useRoute();
+    const listID :number = parseInt(route.params.id.toString());
+    const store = useListStore();
+
+    const list = store.getListByID(listID)
+    let type = list?.type;
+
     return {
-      type
+      type,
+      list
     }
   },
   components: {

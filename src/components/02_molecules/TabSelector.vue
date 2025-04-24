@@ -1,20 +1,6 @@
 <!-- tab selector to select list type -->
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 
-export default defineComponent({
-  name: 'TabSelector',
-  setup() {
-
-    return {
-
-    }
-  },
-  components: {
-
-  }
-
-});
 </script>
 
 <template>
