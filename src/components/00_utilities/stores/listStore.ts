@@ -78,6 +78,18 @@ export const useListStore = defineStore('list', () => {
         }
 
     }
-
-    return { lists, getListCount, getListByID, addList, addItemToList, deleteItem, toggleItemCompleted, editItem, addSubtask}
-})
+        return {
+            lists,
+            getListCount,
+            getListByID,
+            addList,
+            addItemToList,
+            deleteItem,
+            toggleItemCompleted,
+            editItem,
+            addSubtask
+        }
+    },
+    {
+        persist: true,
+    })
