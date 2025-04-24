@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import type {List} from "../00_utilities/types/list";
 import {computed, ref} from "vue";
-import TaskItem from "@/components/01_atoms/TaskItem.vue";
+import Task from "@/components/01_atoms/Task.vue";
 import AddListOverlay from "@/components/02_molecules/AddListOverlay.vue";
 import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 import {useListStore} from "@/components/00_utilities/stores/listStore";
@@ -27,9 +27,9 @@ const toggleItemCompleted = (itemID: number) => store.toggleItemCompleted(props.
 
 <template>
   <h1>{{list.name}}</h1>
-  <TaskItem @toggleChecked="toggleItemCompleted" :task="task" v-for="task in tasks" :key="task.id">
+  <Task @toggleCheckedItem="toggleItemCompleted" :task="task" v-for="task in tasks" :key="task.id">
     {{task.text}}
-  </TaskItem>
+  </Task>
   <ButtonIcon :action="toggleAddItemOverlay">Add item</ButtonIcon>
   <AddListOverlay @submit="addItem" :close="toggleAddItemOverlay" v-show="openOverlay"/>
 </template>

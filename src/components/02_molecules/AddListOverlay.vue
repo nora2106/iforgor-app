@@ -22,7 +22,7 @@
 
 <template>
     <div>
-      <h3>Neue Liste hinzufügen</h3>
+<!--      <h3>Neue Liste hinzufügen</h3>-->
       <input v-model="name" type="text" placeholder="Name"/>
       <ButtonIcon :action="sendValue">Erstellen</ButtonIcon>
       <p>{{errorMessage}}</p>
