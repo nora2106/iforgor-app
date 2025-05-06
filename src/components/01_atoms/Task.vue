@@ -4,28 +4,30 @@
   import CheckableItem from "@/components/01_atoms/CheckableItem.vue";
   import TaskDetail from "@/components/01_atoms/TaskDetail.vue";
   import {useListStore} from "@/components/00_utilities/stores/listStore";
-  import AddListOverlay from "@/components/02_molecules/AddListOverlay.vue";
+  import {ref} from "vue";
 
   const props = defineProps<{ task: TaskItem }>();
   const emit = defineEmits<{
     (e: 'toggleCheckedItem', itemID: number): void;
   }>();
   const store = useListStore();
+  const showDetail = ref<boolean>(false);
 
+  const toggleDetailView = () => {
+    showDetail.value = !showDetail.value;
+  }
 
   const handleSubtaskDone = (id: number) => emit("toggleCheckedItem", id);
 
   const addSubtask = (text: string) => {
-    console.log('add subtask')
     store.addSubtask(props.task.listID, props.task.id, text);
   }
-
 </script>
 
 <template>
   <li>
-    <CheckableItem @toggleChecked="handleSubtaskDone" :item="props.task"/>
-    <TaskDetail @addSubitem="addSubtask" :task="props.task"/>
+    <CheckableItem @onClick="toggleDetailView" @toggleChecked="handleSubtaskDone" :item="props.task"/>
+    <TaskDetail v-show="showDetail" @addSubitem="addSubtask" :task="props.task"/>
   </li>
 </template>
 

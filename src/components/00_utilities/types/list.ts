@@ -26,9 +26,11 @@ export interface ShoppingItem extends BaseListItem {
 
 export type ListItem = TaskItem | ShoppingItem;
 
+export type ListType = "task" | "shopping";
+
 export interface List {
     id: number;
-    type: 'task' | 'shopping';
+    type: ListType;
     name: string;
     items: ListItem[];
 }
