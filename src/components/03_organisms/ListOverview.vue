@@ -5,22 +5,12 @@ import {useListStore} from "@/components/00_utilities/stores/listStore";
 import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 import AddListOverlay from "@/components/02_molecules/AddListOverlay.vue";
 import {useUiStore} from "@/components/00_utilities/stores/uiStore";
+import type {List} from "@/components/00_utilities/types/list";
 
 const listStore = useListStore();
 const uiStore = useUiStore();
 const openOverlay = ref<boolean>(false)
-
-const listsByType = computed(() => {
-  switch (uiStore.activeType) {
-    case 'task':
-    case 'shopping':
-      return listStore.getListsByType(uiStore.activeType)
-    case 'recipe':
-      // add recipe store
-    default:
-      return []
-  }
-})
+defineProps<{ lists: List[] }>();
 
 const toggleAddListOverlay = () => {
   openOverlay.value = !openOverlay.value;
@@ -37,9 +27,9 @@ const addNewList = (name: string) => {
 </script>
 
 <template>
-      <p v-if="listsByType.length === 0">No lists available</p>
+      <p v-if="lists.length === 0">No lists available</p>
       <ul>
-        <ListPreview v-for="list in listsByType" :key="list.id">
+        <ListPreview v-for="list in lists" :key="list.id">
           <router-link :to="'/list/' + list.id">
             {{list.name}}
           </router-link>
@@ -50,5 +40,7 @@ const addNewList = (name: string) => {
 </template>
 
 <style scoped>
-
+  li {
+    list-style: none;
+  }
 </style>

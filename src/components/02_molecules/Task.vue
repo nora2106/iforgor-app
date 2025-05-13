@@ -2,7 +2,7 @@
 <script setup lang="ts">
   import {TaskItem} from "@/components/00_utilities/types/list";
   import CheckableItem from "@/components/01_atoms/CheckableItem.vue";
-  import TaskDetail from "@/components/01_atoms/TaskDetail.vue";
+  import TaskDetail from "@/components/02_molecules/TaskDetail.vue";
   import {useListStore} from "@/components/00_utilities/stores/listStore";
   import {ref} from "vue";
 
@@ -17,16 +17,15 @@
     showDetail.value = !showDetail.value;
   }
 
-  const handleSubtaskDone = (id: number) => emit("toggleCheckedItem", id);
-
   const addSubtask = (text: string) => {
     store.addSubtask(props.task.listID, props.task.id, text);
   }
+
 </script>
 
 <template>
   <li>
-    <CheckableItem @onClick="toggleDetailView" @toggleChecked="handleSubtaskDone" :item="props.task"/>
+    <CheckableItem @toggleDetail="toggleDetailView" @toggleChecked="handleSubtaskDone" :listID="props.task.listID" :item="props.task"/>
     <TaskDetail v-show="showDetail" @addSubitem="addSubtask" :task="props.task"/>
   </li>
 </template>

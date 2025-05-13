@@ -1,14 +1,9 @@
 <script setup lang="ts">
-
+import AppLayout from "@/components/04_templates/AppLayout.vue";
 </script>
 
 <template>
-  <nav>
-    <router-link to="/">Home</router-link>
-  </nav>
-  <main>
-    <router-view />
-  </main>
+  <AppLayout/>
 </template>
 
 <style>

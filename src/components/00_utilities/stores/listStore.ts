@@ -28,7 +28,7 @@ export const useListStore = defineStore('list', () => {
                 list.items.push({
                     type: list.type,
                     id: Date.now(),
-                    completed: false,
+                    checked: false,
                     text: content,
                     listID,
                     subtasks: []
@@ -47,12 +47,11 @@ export const useListStore = defineStore('list', () => {
         }
 
         // toggle the item completion state
-        function toggleItemCompleted(listID: number, itemID: number) {
+        function toggleItemChecked(listID: number, itemID: number) {
             const list = lists.value.find(l => l.id === listID);
             const item = list?.items.find(i => i.id === itemID);
-
             if (item) {
-                item.completed = !item.completed;
+                item.checked = !item.checked;
             }
         }
 
@@ -89,19 +88,38 @@ export const useListStore = defineStore('list', () => {
             }
         }
 
+        // toggle the subtask completion state
+        function toggleSubtaskChecked(listID: number, itemID: number, subtaskID: number) {
+            const list = lists.value.find(l => l.id === listID);
+            const item = list?.items.find((i): i is TaskItem => i.type === 'task' && i.id === itemID);
+            const subtask = item?.subtasks.find(i => i.id === subtaskID);
+            if (item && subtask) {
+                subtask.checked = !subtask.checked;
+            }
+        }
+
         // add a subtask to a task item
         function addSubtask(listID: number, itemID: number, subtaskTitle: string) {
             const list = lists.value.find(l => l.id === listID);
             const taskItem = list?.items.find(i => i.id === itemID);
-
             if (taskItem && taskItem.type === 'task') {
                 taskItem.subtasks.push({
                     id: Date.now(),
                     text: subtaskTitle,
-                    completed: false,
+                    checked: false,
+                    parentID: taskItem.id
                 })
             }
+        }
 
+        // delete a subtask from a task item
+        function deleteSubtask(listID: number, itemID: number, subtaskID: number) {
+            const list = lists.value.find(l => l.id === listID);
+            const item = list?.items.find((i): i is TaskItem => i.type === 'task' && i.id === itemID);
+            const subtask = item?.subtasks.find(i => i.id === subtaskID);
+            if(item && subtask) {
+                item.subtasks = item.subtasks.filter(subtask => subtask.id !== subtaskID);
+            }
         }
 
         return {
@@ -112,10 +130,12 @@ export const useListStore = defineStore('list', () => {
             addList,
             addItemToList,
             deleteItem,
-            toggleItemCompleted,
+            toggleItemChecked,
             editListItem,
             editSubtask,
             addSubtask,
+            deleteSubtask,
+            toggleSubtaskChecked
         }
     },
     {

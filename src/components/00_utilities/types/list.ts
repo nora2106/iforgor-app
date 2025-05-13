@@ -1,7 +1,7 @@
 export interface BaseListItem {
     id: number;
     type: 'task' | 'shopping';
-    completed: boolean;
+    checked: boolean;
     text: string;
     listID: number
 }
@@ -9,7 +9,8 @@ export interface BaseListItem {
 export interface SubTask {
     id: number;
     text: string,
-    completed: boolean;
+    checked: boolean;
+    parentID: number;
 }
 
 export interface TaskItem extends BaseListItem {

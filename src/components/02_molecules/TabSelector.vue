@@ -13,8 +13,10 @@
 </script>
 
 <template>
-  <div v-for="type in types" class="tab-wrapper">
-    <button @click="selectType(type.type)">{{type.name}}</button>
+  <div class="tab-wrapper">
+    <div v-for="type in types">
+      <button @click="selectType(type.type)">{{type.name}}</button>
+    </div>
   </div>
 </template>
 

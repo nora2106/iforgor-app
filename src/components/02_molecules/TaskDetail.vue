@@ -16,7 +16,7 @@
 
 <template>
     <div>
-        <CheckableItem :item="subtask" v-for="subtask in props.task.subtasks"/>
+        <CheckableItem :parentItemID="props.task.id" :listID="props.task.listID" :item="subtask" v-for="subtask in props.task.subtasks"/>
         <AddListOverlay @submit="handleSubtaskCreate"/>
     </div>
 </template>

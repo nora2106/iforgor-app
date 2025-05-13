@@ -1,11 +1,11 @@
 import {createRouter, createWebHistory} from 'vue-router'
 
 import MainPage from './components/05_pages/MainPage.vue'
-import ListView from './components/05_pages/ListView.vue'
+import ListPage from './components/05_pages/ListPage.vue'
 
 const routes = [
     { path: '/', component: MainPage },
-    { path: '/list/:id', component: ListView },
+    { path: '/list/:id', component: ListPage },
 ]
 
 export const router = createRouter({
