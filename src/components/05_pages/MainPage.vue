@@ -22,7 +22,7 @@ const listsByType = computed(() => {
 </script>
 
 <template>
-  <h1>Homepage</h1>
+  <h1>{{ $t("home.title") }}</h1>
   <ListLayout :title="''">
     <ListOverview :activeType="uiStore.activeType" :lists="listsByType"/>
   </ListLayout>
