@@ -7,6 +7,8 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { registerSW } from 'virtual:pwa-register'
 import de from '../locales/de.json';
 import en from '../locales/en.json';
+import '../src/components/00_utilities/styles/base.scss';
+import {useThemeStore} from "@/components/00_utilities/stores/themeStore";
 
 registerSW({
     immediate: true,
@@ -27,4 +29,7 @@ const useArray = [pinia, router, i18n];
 useArray.forEach((item)=>{
     app.use(item);
 })
+
+const themeStore = useThemeStore();
+themeStore.setTheme('light'); // @todo add local storage
 app.mount('#app');

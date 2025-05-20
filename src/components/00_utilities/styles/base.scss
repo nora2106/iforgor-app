@@ -1,0 +1,54 @@
+@import 'variables';
+:root {
+  --text-color: #{$black};
+  --page-bg: #{$pale-blue};
+  --icon-color: #{$purple};
+  --btn-color: #{$pink};
+  --component-bg: #{$white};
+  --element-color: #{$light-pink};
+  --text-color-contrast: #{$pale-blue};
+}
+
+[data-theme="light"] {
+  --text-color: #{$black};
+  --page-bg: #{$pale-blue};
+  --icon-color: #{$purple};
+  --btn-color: #{$pink};
+  --component-bg: #{$white};
+  --element-color: #{$light-pink};
+  --text-color-contrast: #{$pale-blue};
+}
+
+[data-theme="dark"] {
+  --text-color: #{$pale-blue};
+  --page-bg: #{$dark-purple};
+  --icon-color: #{$light-purple};
+  --btn-color: #{$light-blue};
+  --component-bg: #{$black};
+  --element-color: #{$purple};
+  --text-color-contrast: #{$pale-blue};
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../../../../public/fonts/Lexend-VariableFont_wght.woff2');
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('../../../../public/fonts/WorkSans-VariableFont_wght.woff2');
+}
+
+body {
+  background-color: var(--page-bg);
+}
+
+p, a, span, li {
+  color: var(--text-color);
+  font-family: "Work Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Lexend", sans-serif;
+  color: var(--text-color);
+}

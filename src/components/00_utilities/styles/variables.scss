@@ -1,0 +1,33 @@
+// colors
+$black: #060606;
+$pale-blue: #E2F0FA;
+$white: #ffffff;
+$light-pink: #FFDCE8;
+$pink: #CE6B90;
+$dark-purple: #312F49;
+$purple: #52568E;
+$light-purple: #AFB5F9;
+$light-blue: #91C6EC;
+
+// breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// font sizes
+$font-size-base: clamp(1rem, 4vw, 1.4rem);
+$font-size-small: clamp(.8rem, 4vw, 1.1rem);
+$font-size-smallest: clamp(.6rem, 4vw, .8rem);
+$font-size-big: clamp(.7rem, 4vw, 1.4rem);
+$font-size-biggest: clamp(.9rem, 4vw, 1.8rem);
+
+// spacing
+$text-padding-mobile: 2rem;
+$text-padding-desktop: 3rem;
+$spacer: 1rem;
+
+// other
+$base-transition: .3s ease-in;
+$border-radius-mobile: 1.5rem;
