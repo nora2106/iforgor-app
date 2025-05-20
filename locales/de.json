@@ -1,5 +1,20 @@
 {
   "home": {
     "title": "Startseite"
+  },
+  "tabs": {
+    "task": "To-Do",
+    "shopping": "Shopping",
+    "recipes": "Rezepte",
+    "all-tasks": "Alle Aufgaben",
+    "assigned": "Mir zugewiesen",
+    "ingredients": "Zutaten",
+    "instruction": "Anleitung",
+    "tags": "Tags"
+  },
+  "list": {
+    "create-list": "Neue Liste",
+    "add-task": "Neue Aufgabe",
+    "add-subtask": "Neue Teilaufgabe"
   }
 }

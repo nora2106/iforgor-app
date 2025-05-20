@@ -16,17 +16,22 @@ $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
 $breakpoint-xxl: 1400px;
 
-// font sizes
+// fonts
 $font-size-base: clamp(1rem, 4vw, 1.4rem);
 $font-size-small: clamp(.8rem, 4vw, 1.1rem);
 $font-size-smallest: clamp(.6rem, 4vw, .8rem);
 $font-size-big: clamp(.7rem, 4vw, 1.4rem);
 $font-size-biggest: clamp(.9rem, 4vw, 1.8rem);
 
+$font-weight-light: 300;
+$font-weight-base: 400;
+$font-weight-bold: 600;
+
 // spacing
 $text-padding-mobile: 2rem;
 $text-padding-desktop: 3rem;
 $spacer: 1rem;
+$max-content-with-mobile: 30rem;
 
 // other
 $base-transition: .3s ease-in;

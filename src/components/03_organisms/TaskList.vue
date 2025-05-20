@@ -6,6 +6,7 @@ import Task from "@/components/02_molecules/Task.vue";
 import AddListOverlay from "@/components/02_molecules/AddListOverlay.vue";
 import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 import {useListStore} from "@/components/00_utilities/stores/listStore";
+import ListWrapper from "@/components/02_molecules/ListWrapper.vue";
 
 const props = defineProps<{ list: List }>();
 const tasks = computed(() => props.list.items);
@@ -25,14 +26,16 @@ const addItem = (text: string) => {
 </script>
 
 <template>
-  <Task @toggleCheckedItem="toggleItemCompleted" :task="task" v-for="task in tasks" :key="task.id">
-    {{task.text}}
-  </Task>
+  <ListWrapper>
+    <Task @toggleCheckedItem="toggleItemCompleted" :task="task" v-for="task in tasks" :key="task.id">
+      {{task.text}}
+    </Task>
+  </ListWrapper>
   <ButtonIcon :action="toggleAddItemOverlay">Add item</ButtonIcon>
   <AddListOverlay @submit="addItem" :close="toggleAddItemOverlay" v-show="openOverlay"/>
 </template>
 
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

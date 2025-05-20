@@ -4,8 +4,8 @@ import type {ListType} from "@/components/00_utilities/types/list";
 import {TypeSelection} from "@/components/00_utilities/types/general";
 
 export const useUiStore = defineStore('ui', () => {
-    const activeType = ref<TypeSelection>('task');
-    function setActiveType (type: ListType) { activeType.value = type}
+    const activeListType = ref<TypeSelection>('task');
+    function setActiveListType (type: ListType) { activeListType.value = type}
 
-    return { activeType, setActiveType}
+    return { activeListType, setActiveListType}
 });

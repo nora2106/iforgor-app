@@ -64,7 +64,7 @@ watch(isChecked, () => {
     <span @click="toggleEdit"> Edit</span>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 
 li {
   list-style: none;

@@ -6,6 +6,7 @@ import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 import AddListOverlay from "@/components/02_molecules/AddListOverlay.vue";
 import {useUiStore} from "@/components/00_utilities/stores/uiStore";
 import type {List} from "@/components/00_utilities/types/list";
+import ListWrapper from "@/components/02_molecules/ListWrapper.vue";
 
 const listStore = useListStore();
 const uiStore = useUiStore();
@@ -17,30 +18,32 @@ const toggleAddListOverlay = () => {
 }
 
 const addNewList = (name: string) => {
-  if (uiStore.activeType === 'recipe') {
+  if (uiStore.activeListType === 'recipe') {
     // add recipe store
   } else {
-    listStore.addList(name, uiStore.activeType);
+    listStore.addList(name, uiStore.activeListType);
   }
   toggleAddListOverlay();
 }
 </script>
 
 <template>
-      <p v-if="lists.length === 0">No lists available</p>
-      <ul>
-        <ListPreview v-for="list in lists" :key="list.id">
-          <router-link :to="'/list/' + list.id">
-            {{list.name}}
-          </router-link>
-        </ListPreview>
-      </ul>
-  <ButtonIcon :action="toggleAddListOverlay">Create list</ButtonIcon>
-  <AddListOverlay @submit="addNewList" :close="toggleAddListOverlay" v-show="openOverlay"/>
+    <p v-if="lists.length === 0">No lists available</p>
+    <ListWrapper>
+      <ListPreview v-for="list in lists" :key="list.id">
+        <router-link class="list-item__link" :to="'/list/' + list.id">
+          {{list.name}}
+        </router-link>
+      </ListPreview>
+    </ListWrapper>
+    <ButtonIcon :action="toggleAddListOverlay">Create list</ButtonIcon>
+    <AddListOverlay @submit="addNewList" :close="toggleAddListOverlay" v-show="openOverlay"/>
 </template>
 
-<style scoped>
-  li {
-    list-style: none;
-  }
+<style lang="scss" scoped>
+
+.list-item__link {
+  text-decoration: none;
+}
+
 </style>

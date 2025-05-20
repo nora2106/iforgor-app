@@ -6,7 +6,7 @@
   --btn-color: #{$pink};
   --component-bg: #{$white};
   --element-color: #{$light-pink};
-  --text-color-contrast: #{$pale-blue};
+  --text-color-contrast: #{$white};
 }
 
 [data-theme="light"] {
@@ -16,7 +16,7 @@
   --btn-color: #{$pink};
   --component-bg: #{$white};
   --element-color: #{$light-pink};
-  --text-color-contrast: #{$pale-blue};
+  --text-color-contrast: #{$white};
 }
 
 [data-theme="dark"] {
@@ -41,6 +41,13 @@
 
 body {
   background-color: var(--page-bg);
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 p, a, span, li {
