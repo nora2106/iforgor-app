@@ -3,7 +3,9 @@ import AppLayout from "@/components/04_templates/AppLayout.vue";
 </script>
 
 <template>
-  <AppLayout/>
+  <AppLayout>
+    <router-view/>
+  </AppLayout>
 </template>
 
 <style>

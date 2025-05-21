@@ -2,7 +2,7 @@
 import {computed, ref} from 'vue';
 import ListPreview from "@/components/01_atoms/ListPreview.vue";
 import {useListStore} from "@/components/00_utilities/stores/listStore";
-import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
+import Button from "@/components/01_atoms/Button.vue";
 import AddListOverlay from "@/components/02_molecules/AddListOverlay.vue";
 import {useUiStore} from "@/components/00_utilities/stores/uiStore";
 import type {List} from "@/components/00_utilities/types/list";
@@ -36,7 +36,7 @@ const addNewList = (name: string) => {
         </router-link>
       </ListPreview>
     </ListWrapper>
-    <ButtonIcon :action="toggleAddListOverlay">Create list</ButtonIcon>
+    <Button :action="toggleAddListOverlay">Create list</Button>
     <AddListOverlay @submit="addNewList" :close="toggleAddListOverlay" v-show="openOverlay"/>
 </template>
 

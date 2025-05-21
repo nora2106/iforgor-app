@@ -1,7 +1,7 @@
 <!-- component template -->
 <script setup lang="ts">
   import {ref} from "vue";
-  import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
+  import Button from "@/components/01_atoms/Button.vue";
 
   let name = ref("");
   let errorMessage = ref("");
@@ -24,7 +24,7 @@
     <div>
 <!--      <h3>Neue Liste hinzufügen</h3>-->
       <input v-model="name" type="text" placeholder="Name"/>
-      <ButtonIcon :action="sendValue">Erstellen</ButtonIcon>
+      <Button :action="sendValue">Erstellen</Button>
       <p>{{errorMessage}}</p>
     </div>
 </template>
