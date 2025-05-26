@@ -34,7 +34,6 @@ const options: {name: string; value: TypeSelection}[] = [{name: i18n.t("tabs.tas
 </script>
 
 <template>
-  <h1>{{ $t("home.title") }}</h1>
   <ListLayout :selection="selectListType" :options="options" :title="''">
     <ListOverview :activeType="uiStore.activeType" :lists="listsByType"/>
   </ListLayout>

@@ -15,6 +15,11 @@
   "list": {
     "create-list": "Neue Liste",
     "add-task": "Neue Aufgabe",
-    "add-subtask": "Neue Teilaufgabe"
+    "add-subtask": "Neue Teilaufgabe",
+    "title-task": "To-Do-Listen",
+    "title-shopping": "Shopping-Listen",
+    "title-recipe": "Rezepte",
+    "list-singular": "Liste",
+    "list-plural": "Listen"
   }
 }

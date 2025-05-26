@@ -9,6 +9,7 @@ import de from '../locales/de.json';
 import en from '../locales/en.json';
 import '../src/components/00_utilities/styles/base.scss';
 import {useThemeStore} from "@/components/00_utilities/stores/themeStore";
+import { Icon } from '@iconify/vue'
 
 registerSW({
     immediate: true,
@@ -32,4 +33,5 @@ useArray.forEach((item)=>{
 
 const themeStore = useThemeStore();
 themeStore.setTheme('light'); // @todo add local storage
+app.component('Icon', Icon)
 app.mount('#app');

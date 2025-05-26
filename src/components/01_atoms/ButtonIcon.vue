@@ -2,24 +2,28 @@
 <script setup lang="ts">
   const props = defineProps<{
     action: () => void,
+    icon: string;
     noBg?: boolean
   }>();
+
 </script>
 
 <template>
-  <button :class="noBg ? 'btn no-bg' : 'btn'" @click="props.action">
-    <slot/>
+  <button class="btn" @click="props.action">
+    <Icon :icon="props.icon" />
   </button>
 </template>
 
 <style lang="scss" scoped>
 .btn {
   border-radius: 100%;
-  padding: 1rem;
-  background-color: var(--btn-color);
+  background-color: var(--btn-bg-color, var(--btn-color));
+  border: none;
+  padding: .4rem;
 
-  &.no-bg {
-    background-color: transparent;
+  svg {
+    color: var(--btn-icon-color, var(--icon-color));
+    font-size: 1.8rem;
   }
 }
 </style>

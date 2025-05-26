@@ -1,5 +1,5 @@
 :root {
-  --text-color: #{$black};
+  --text-color: #{$dark};
   --page-bg: #{$pale-blue};
   --icon-color: #{$purple};
   --btn-color: #{$pink};
@@ -9,7 +9,7 @@
 }
 
 [data-theme="light"] {
-  --text-color: #{$black};
+  --text-color: #{$dark};
   --page-bg: #{$pale-blue};
   --icon-color: #{$purple};
   --btn-color: #{$pink};
@@ -57,4 +57,9 @@ p, a, span, li {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Lexend", sans-serif;
   color: var(--text-color);
+}
+
+h1 {
+  font-weight: $font-weight-bold;
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
 }

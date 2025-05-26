@@ -12,5 +12,31 @@ export const useUiStore = defineStore('ui', () => {
         mobileButtons.value = btns;
     }
 
-    return { activeListType, setActiveListType, mobileButtons, setMobileButtons}
+    const settingsContext = ref<'task' | 'shopping' | null>(null);
+    function setSettingsContext(type: 'task' | 'shopping') {
+        settingsContext.value = type;
+    }
+
+    const settingsOpen = ref(false);
+    function toggleSettings() {
+        settingsOpen.value = !settingsOpen;
+    }
+
+    const addUserOverlayOpen = ref(false);
+    function toggleAddUserOverlay() {
+        settingsOpen.value = !addUserOverlayOpen;
+    }
+
+    return {
+        activeListType,
+        setActiveListType,
+        mobileButtons,
+        setMobileButtons,
+        settingsContext,
+        setSettingsContext,
+        settingsOpen,
+        toggleSettings,
+        addUserOverlayOpen,
+        toggleAddUserOverlay
+    }
 });

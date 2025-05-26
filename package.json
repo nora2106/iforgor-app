@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .ts,.vue"
   },
   "dependencies": {
+    "@iconify/vue": "^5.0.0",
     "@vitejs/plugin-vue": "^5.2.3",
     "pinia": "^3.0.2",
     "pinia-plugin-persistedstate": "^4.2.0",

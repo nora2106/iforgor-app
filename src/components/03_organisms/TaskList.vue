@@ -3,25 +3,16 @@
 import type {List} from "../00_utilities/types/list";
 import {computed, ref} from "vue";
 import Task from "@/components/02_molecules/Task.vue";
-import AddListOverlay from "@/components/02_molecules/AddListOverlay.vue";
-import Button from "@/components/01_atoms/Button.vue";
 import {useListStore} from "@/components/00_utilities/stores/listStore";
 import ListWrapper from "@/components/02_molecules/ListWrapper.vue";
 
 const props = defineProps<{ list: List }>();
 const tasks = computed(() => props.list.items);
 const store = useListStore();
-const openOverlay = ref<boolean>(false)
-
-const toggleAddItemOverlay = () => {
-  openOverlay.value = !openOverlay.value;
-}
 
 const addItem = (text: string) => {
   store.addItemToList(props.list.id, text);
-  toggleAddItemOverlay();
 }
-
 
 </script>
 
@@ -31,8 +22,6 @@ const addItem = (text: string) => {
       {{task.text}}
     </Task>
   </ListWrapper>
-  <Button :action="toggleAddItemOverlay">Add item</Button>
-  <AddListOverlay @submit="addItem" :close="toggleAddItemOverlay" v-show="openOverlay"/>
 </template>
 
 
