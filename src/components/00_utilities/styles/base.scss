@@ -1,4 +1,3 @@
-@import 'variables';
 :root {
   --text-color: #{$black};
   --page-bg: #{$pale-blue};
@@ -31,12 +30,12 @@
 
 @font-face {
   font-family: 'Lexend';
-  src: url('../../../../public/fonts/Lexend-VariableFont_wght.woff2');
+  src: url('/fonts/Lexend-VariableFont_wght.woff2');
 }
 
 @font-face {
   font-family: 'Work Sans';
-  src: url('../../../../public/fonts/WorkSans-VariableFont_wght.woff2');
+  src: url('/fonts/WorkSans-VariableFont_wght.woff2');
 }
 
 body {

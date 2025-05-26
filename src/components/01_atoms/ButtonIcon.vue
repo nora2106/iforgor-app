@@ -7,7 +7,9 @@
 </script>
 
 <template>
-  <button :class="noBg ? 'btn no-bg' : 'btn'" @click="props.action"/>
+  <button :class="noBg ? 'btn no-bg' : 'btn'" @click="props.action">
+    <slot/>
+  </button>
 </template>
 
 <style lang="scss" scoped>
