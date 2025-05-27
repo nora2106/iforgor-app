@@ -4,7 +4,7 @@
 import TabSelector from "@/components/02_molecules/TabSelector.vue";
 import {useUiStore} from "@/components/00_utilities/stores/uiStore";
 
-const props = defineProps<{selection: Function, title: string, options: {name: string; value: string}[]}>();
+const props = defineProps<{selection: void, title: string, options: {name: string; value: string}[]}>();
 
 const uiStore = useUiStore();
 uiStore.setCurrentTitle(props.title);
@@ -12,7 +12,7 @@ uiStore.setCurrentTitle(props.title);
 
 <template>
     <div class="list-wrapper">
-      <TabSelector :onSelection="selection" :defaultOption="defaultOption" :options="options"/>
+      <TabSelector :onSelection="selection" :options="options"/>
       <slot/>
     </div>
 </template>

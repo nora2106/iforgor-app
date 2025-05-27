@@ -4,54 +4,24 @@ import {ListItem} from "@/components/00_utilities/types/list";
 import {computed, ref, watch} from "vue";
 import {useListStore} from "@/components/00_utilities/stores/listStore";
 import { isRegExp } from "@vue/shared";
+import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 
-const props = defineProps<{ item: ListItem, listID: number, parentItemID?: number }>();
-const emit = defineEmits<{
-  (e: 'toggleChecked', itemID: number): void;
-  (e: 'toggleDetail'): void;
-  (e: 'delete', itemID: number): void;
-  (e: 'edit', itemID: number, newText: string, quantity?: string, parentItemID?: number): void;
+const props = defineProps<{ item: ListItem, listID: number, parentItemID?: number, toggleDetail?: void }>();
+
+const emits = defineEmits<{
+  (e: 'delete-item', id: number, parentID?: number): void;
+  (e: 'toggle-checked', id: number, parentID?: number): void;
 }>();
-const isChecked = ref<boolean>(computed(() => props.item.checked).value);
-const store = useListStore();
 
-const toggleItemCompleted = (itemID: number, parentID?: number) => {
-  // is subtask
-  if(parentID) {
-    store.toggleSubtaskChecked(props.listID, parentID, itemID);
-  }
-  // is item
-  else {
-    store.toggleItemChecked(props.listID, itemID);
-  }
-}
+const isChecked = ref<boolean>(computed(() => props.item.checked).value);
 
 const toggleEdit = () => {
+  console.log('edit');
   // open edit window
 }
 
-const editItem = (itemID: number, newText: string, parentItemID?: number, quantity?: number) => {
-  // is subtask
-  if(parentItemID) {
-    store.editSubtask(props.item.listID, parentItemID, itemID, newText);
-  }
-  // is item
-  else {
-    store.editListItem(props.item.listID, itemID, newText, quantity);
-  }
-}
-
-const deleteTask = (itemID: number, parentItemID?: number) => {
-  // is subtask
-  if(parentItemID) {
-    store.deleteSubtask(props.listID, parentItemID, itemID);
-  }
-  // is item
-  store.deleteItem(props.listID, itemID);
-}
-
 watch(isChecked, () => {
-  toggleItemCompleted(props.item.id, props.parentItemID);
+  emits("toggle-checked", props.item.id, props.parentItemID);
 })
 
 // @todo add swipes for checking and deleting
@@ -59,15 +29,55 @@ watch(isChecked, () => {
 </script>
 
 <template>
-    <input v-model="isChecked" :id="props.item.id" type="checkbox">
-    <span @click="emit('toggleDetail')">{{props.item.text}}</span>
-    <span @click="toggleEdit"> Edit</span>
+    <input class="checkbox" v-model="isChecked" :id="props.item.id" type="checkbox">
+    <span>{{props.item.text}}</span>
+    <ButtonIcon class="btn-detail" v-if="toggleDetail" :action="props.toggleDetail" icon="bi:three-dots"/>
+    <ButtonIcon class="btn-delete" v-if="parentItemID" :action="emits('delete-item', props.item.id)" icon="solar:trash-bin-trash-bold"/>
 </template>
 
 <style lang="scss" scoped>
+.btn-delete {
+  margin-left: auto;
+}
 
-li {
-  list-style: none;
+.btn-detail {
+  --btn-icon-color: var(--icon-color);
+  --icon-font-size: 1.4rem;
+  --btn-size: auto;
+  --btn-padding: .3rem;
+}
+
+.checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  background-color: transparent;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  &:after {
+    content: '';
+    border: .3rem solid var(--icon-color);
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+  }
+
+  &:checked {
+    &:after {
+      width: 1.5rem;
+      height: 1.5rem;
+      background-color: var(--icon-color);
+      mask: url('/img/icons/check.svg') no-repeat center;
+      -webkit-mask: url('/img/icons/check.svg') no-repeat center;
+      transform: scale(1.5);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;;
+  }
 }
 
 </style>
