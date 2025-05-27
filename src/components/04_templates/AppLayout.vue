@@ -7,7 +7,6 @@ import {computed} from "vue";
 import { useRoute } from 'vue-router'
 
 const uiStore = useUiStore();
-const titleKey = computed(() => `list.title-${uiStore.activeListType}`)
 
 const route = useRoute()
 const isHome = computed(() => route.path === '/')
@@ -16,38 +15,53 @@ const isHome = computed(() => route.path === '/')
 <template>
   <div class="app-layout">
     <header>
-      <router-link :class="isHome ? `nav-link hidden`: `nav-link`" to="/">
-        <Icon icon="ep:arrow-left-bold" />
-      </router-link>
-      <h1>{{ $t(titleKey) }}</h1>
+        <router-link :class="isHome ? `nav-link hidden`: `nav-link`" to="/">
+          <Icon icon="ep:arrow-left-bold" />
+        </router-link>
+      <div class="title-wrapper">
+        <h1>{{ $t(uiStore.currentTitle) }}</h1>
+        <p>{{ $t(`list.list-${uiStore.currentListCount.type}`, uiStore.currentListCount.count) }}</p>
+      </div>
     </header>
     <main>
       <slot/>
     </main>
     <footer>
-      <p>Footer</p>
     </footer>
     <BottomMenu v-if="uiStore.mobileButtons != null" :btns="uiStore.mobileButtons"/>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: .5rem;
+
+  h1, p {
+    margin: 0;
+  }
+}
+
 header {
+  margin: 1rem;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
-  margin-inline: 1rem;
 }
+
+.hidden {
+  display: none;
+}
+
 .nav-link {
   background-color: var(--btn-color);
   padding: .5rem;
   border-radius: 100%;
   font-size: 1.5rem;
   color: var(--text-color-contrast);
-
-  &.hidden {
-    display: none;
-  }
 }
 </style>

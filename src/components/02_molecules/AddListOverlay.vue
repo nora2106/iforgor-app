@@ -18,6 +18,7 @@
       errorMessage.value = "Bitte gib einen Namen ein."
     }
   }
+  // @todo assign max letters
 </script>
 
 <template>

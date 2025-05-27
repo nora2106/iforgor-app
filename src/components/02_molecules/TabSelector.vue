@@ -14,9 +14,7 @@
 
 <template>
   <div class="tab-wrapper">
-    <div v-for="option in options">
-      <button v-bind:class="(selectedOption === option.value ? 'tab-button active' : 'tab-button')" @click="selectOption(option.value)">{{option.name}}</button>
-    </div>
+    <button v-for="option in options" v-bind:class="(selectedOption === option.value ? 'tab-button active' : 'tab-button')" @click="selectOption(option.value)">{{option.name}}</button>
   </div>
 </template>
 
@@ -26,20 +24,22 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: .5rem;
   background-color: var(--element-color);
-  padding: .5rem 1rem;
+  padding: .4rem .5rem;
   border-radius: $border-radius-mobile;
+  width: 85%;
+  max-width: $max-content-with-mobile;
 }
 
 .tab-button {
   background-color: var(--element-color);
-  padding: .5rem 1rem;
+  padding: .7rem 1rem;
   color: var(--text-color);
   border: none;
   border-radius: $border-radius-mobile;
   font-size: $font-size-small;
   font-family: "Lexend", sans-serif;
+  flex-basis: 100%;
 
   &.active {
     background-color: $pink;

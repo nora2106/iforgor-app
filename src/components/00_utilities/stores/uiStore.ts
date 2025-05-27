@@ -27,6 +27,16 @@ export const useUiStore = defineStore('ui', () => {
         settingsOpen.value = !addUserOverlayOpen;
     }
 
+    const currentTitle = ref('');
+    function setCurrentTitle(title: string) {
+        currentTitle.value = title;
+    }
+
+    const currentListCount = ref<{count: number, type: 'list' | 'recipe' |'task' | 'item-task' | 'item-shopping'}>({count: 0, type: 'list'});
+    function setCurrentListCount(Count: number, Type: 'list' | 'recipe' |'task' | 'item-task' | 'item-shopping') {
+        currentListCount.value = {count: Count, type: Type};
+    }
+
     return {
         activeListType,
         setActiveListType,
@@ -37,6 +47,10 @@ export const useUiStore = defineStore('ui', () => {
         settingsOpen,
         toggleSettings,
         addUserOverlayOpen,
-        toggleAddUserOverlay
+        toggleAddUserOverlay,
+        currentTitle,
+        setCurrentTitle,
+        currentListCount,
+        setCurrentListCount
     }
 });

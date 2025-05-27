@@ -17,16 +17,20 @@ const listsByType = computed(() => {
   switch (uiStore.activeListType) {
     case 'task':
     case 'shopping':
+      uiStore.setCurrentListCount(listStore.getListsByType(uiStore.activeListType).length, 'list');
       return listStore.getListsByType(uiStore.activeListType)
     case 'recipe':
+      uiStore.setCurrentListCount(0, uiStore.activeListType);
+      break;
       // add recipe store
     default:
-      return []
+      return [];
   }
 })
 
 const selectListType = (value: ListType) => {
   uiStore.setActiveListType(value);
+  uiStore.setCurrentTitle(`list.title-${value}`);
 }
 
 const options: {name: string; value: TypeSelection}[] = [{name: i18n.t("tabs.task"), value: "task"}, {name: i18n.t("tabs.shopping"), value: "shopping"}, {name: i18n.t("tabs.recipes"), value: "recipe"}]

@@ -30,6 +30,10 @@
 
   const buttons: MobileMenuButtons = [{icon: 'mdi:user-add', label: 'add-user', onClick: uiStore.toggleAddUserOverlay}, {icon: 'ph:plus-bold', label: 'add', onClick: toggleAddOverlay }, {icon: 'solar:settings-bold', label: 'settings', onClick: uiStore.toggleSettings}]
   uiStore.setMobileButtons(buttons);
+  if(list && type) {
+    // @todo get only unchecked items and differentiate between task items and shopping items
+    uiStore.setCurrentListCount(list.items.length, `item-${type}`);
+  }
 </script>
 
 <template>

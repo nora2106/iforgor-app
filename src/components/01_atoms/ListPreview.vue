@@ -1,13 +1,12 @@
 <!-- single list item, can have different types -->
 <script setup lang="ts">
 
-import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 </script>
 
 <template>
   <li>
     <div class="icon-container">
-      <Icon icon="ph:plus-bold"/>
+      <Icon icon="ph:list-bullets-bold"/>
     </div>
     <slot/>
     <Icon icon="ep:arrow-right-bold"/>
@@ -19,7 +18,7 @@ import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 li {
   list-style: none;
   background-color: var(--element-color);
-  padding: .8rem;
+  padding: .6rem;
   border-radius: $border-radius-mobile;
   display: flex;
   flex-direction: row;
@@ -36,9 +35,9 @@ li {
 .icon-container {
   background-color: var(--component-bg);
   border-radius: 100%;
-  padding: 4px;
+  padding: 7px;
   svg {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 }
 
