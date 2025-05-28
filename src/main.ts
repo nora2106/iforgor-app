@@ -20,9 +20,10 @@ registerSW({
 const pinia = createPinia();
 const app = createApp(App);
 const i18n = createI18n({
+    legacy: false,
     locale: 'de',
-    fallbackLocale: 'de',
-    messages: { de, en },
+    fallbackLocale: 'en',
+    messages: { 'de': de, 'en': en },
 });
 
 pinia.use(piniaPluginPersistedstate);

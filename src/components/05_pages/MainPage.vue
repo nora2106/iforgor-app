@@ -39,7 +39,7 @@ const options: {name: string; value: TypeSelection}[] = [{name: i18n.t("tabs.tas
 
 <template>
   <ListLayout :selection="selectListType" :options="options" :title="''">
-    <ListOverview :activeType="uiStore.activeType" :lists="listsByType"/>
+    <ListOverview :lists="listsByType"/>
   </ListLayout>
 </template>
 

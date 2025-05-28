@@ -5,11 +5,14 @@ import BottomMenu from "@/components/02_molecules/BottomMenu.vue";
 import {useUiStore} from "@/components/00_utilities/stores/uiStore";
 import {computed} from "vue";
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 const uiStore = useUiStore();
 
 const route = useRoute()
 const isHome = computed(() => route.path === '/')
+const { t } = useI18n()
+
 </script>
 
 <template>
@@ -19,8 +22,8 @@ const isHome = computed(() => route.path === '/')
           <Icon icon="ep:arrow-left-bold" />
         </router-link>
       <div class="title-wrapper">
-        <h1>{{ $t(uiStore.currentTitle) }}</h1>
-        <p>{{ $t(`list.list-${uiStore.currentListCount.type}`, uiStore.currentListCount.count) }}</p>
+        <h1 v-if="uiStore.currentTitle">{{ t(uiStore.currentTitle) }}</h1>
+        <p>{{ t(`list.list-${uiStore.currentListCount.type}`, uiStore.currentListCount.count) }}</p>
       </div>
     </header>
     <main>
