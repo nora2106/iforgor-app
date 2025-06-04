@@ -3,16 +3,17 @@
 <script setup lang="ts">
 import TabSelector from "@/components/02_molecules/TabSelector.vue";
 import {useUiStore} from "@/components/00_utilities/stores/uiStore";
+import {ListType} from "@/components/00_utilities/types/list";
 
-const props = defineProps<{selection: void, title: string, options: {name: string; value: string}[]}>();
-
+const props = defineProps<{hide?: boolean, selection: (value: ListType) => void, title: string, options?: {name: string; value: ListType}[]}>();
 const uiStore = useUiStore();
+
 uiStore.setCurrentTitle(props.title);
 </script>
 
 <template>
     <div class="list-wrapper">
-      <TabSelector :onSelection="selection" :options="options"/>
+      <TabSelector v-if="!hide" @select="selection" :options="options"/>
       <slot/>
     </div>
 </template>
@@ -26,7 +27,6 @@ uiStore.setCurrentTitle(props.title);
   background-color: var(--component-bg);
   min-height: 75%;
   border-radius: $border-radius-mobile;
-  padding-block: 2rem;
 }
 
 </style>

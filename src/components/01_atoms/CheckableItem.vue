@@ -20,6 +20,10 @@ const toggleEdit = () => {
   // open edit window
 }
 
+const handleDelete = () => {
+  emits('delete-item', props.item.id, props.parentItemID);
+}
+
 watch(isChecked, () => {
   emits("toggle-checked", props.item.id, props.parentItemID);
 })
@@ -31,29 +35,18 @@ watch(isChecked, () => {
 <template>
     <input class="checkbox" v-model="isChecked" :id="props.item.id" type="checkbox">
     <span>{{props.item.text}}</span>
-    <ButtonIcon class="btn-detail" v-if="toggleDetail" :action="props.toggleDetail" icon="bi:three-dots"/>
-    <ButtonIcon class="btn-delete" v-if="parentItemID" :action="emits('delete-item', props.item.id)" icon="solar:trash-bin-trash-bold"/>
+    <slot/>
 </template>
 
 <style lang="scss" scoped>
-.btn-delete {
-  margin-left: auto;
-}
-
-.btn-detail {
-  --btn-icon-color: var(--icon-color);
-  --icon-font-size: 1.4rem;
-  --btn-size: auto;
-  --btn-padding: .3rem;
-}
 
 .checkbox {
   -webkit-appearance: none;
   appearance: none;
   margin: 0;
   background-color: transparent;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.4rem;
+  height: 1.4rem;
 
   &:after {
     content: '';

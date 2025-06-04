@@ -5,14 +5,11 @@ import {computed, ref} from "vue";
 import TaskItem from "@/components/02_molecules/TaskItem.vue";
 import {useListStore} from "@/components/00_utilities/stores/listStore";
 import ListWrapper from "@/components/03_organisms/ListWrapper.vue";
+import ShoppingItem from "@/components/02_molecules/ShoppingItem.vue";
 
 const props = defineProps<{ list: List }>();
-const tasks = computed(() => props.list.items);
+const items = computed(() => props.list.items);
 const store = useListStore();
-
-const addItem = (text: string) => {
-  store.addItemToList(props.list.id, text);
-}
 
 
 
@@ -20,9 +17,9 @@ const addItem = (text: string) => {
 
 <template>
   <ListWrapper>
-    <TaskItem @toggleCheckedItem="toggleItemCompleted" :task="task" v-for="task in tasks" :key="task.id">
-      {{task.text}}
-    </TaskItem>
+    <ShoppingItem @toggleCheckedItem="toggleItemCompleted" :item="item" v-for="item in items" :key="item.id">
+      {{item.text}}
+    </ShoppingItem>
   </ListWrapper>
 </template>
 

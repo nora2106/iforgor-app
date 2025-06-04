@@ -5,6 +5,7 @@
   import TaskDetail from "@/components/02_molecules/TaskDetail.vue";
   import {useListStore} from "@/components/00_utilities/stores/listStore";
   import {ref} from "vue";
+  import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 
   const props = defineProps<{ task: TaskItem }>();
   const store = useListStore();
@@ -14,6 +15,7 @@
     showDetail.value = !showDetail.value;
   }
 
+  // @todo watch changes in store
   const toggleTaskCompleted = (itemID: number, parentID?: number) => {
     // is subtask
     if(parentID) {
@@ -36,17 +38,18 @@
     }
   }
 
-  const addSubtask = (text: string) => {
-    store.addSubtask(props.task.listID, props.task.id, text);
+  const addTask = (text: string, parentID?: number) => {
+    // is subtask
+    if(parentID) {
+      store.addSubtask(props.task.listID, parentID, text);
+    }
+    // is task
+    else {
+      store.addItemToList(props.task.listID, text);
+    }
   }
 
-
-
-  const addTask = () => {
-
-  }
-
-  const editItem = (itemID: number, newText: string, parentItemID?: number) => {
+  const editTask = (itemID: number, newText: string, parentItemID?: number) => {
     // is subtask
     if(parentItemID) {
       store.editSubtask(props.task.listID, parentItemID, itemID, newText);
@@ -61,9 +64,11 @@
 
 <template>
   <li>
-    <CheckableItem @toggle-checked="toggleTaskCompleted" :toggleDetail="toggleDetailView" :listID="props.task.listID" :item="props.task"/>
+    <CheckableItem @delete-item="deleteTask" @toggle-checked="toggleTaskCompleted" :listID="props.task.listID" :item="props.task">
+      <ButtonIcon class="btn-detail" :action="toggleDetailView" icon="bi:three-dots"/>
+    </CheckableItem>
   </li>
-  <TaskDetail v-show="showDetail" @delete-subitem="deleteTask" @toggle-view="toggleDetailView" @add-subitem="addSubtask" :task="props.task"/>
+  <TaskDetail @delete-task="deleteTask" v-show="showDetail" @toggle-view="toggleDetailView" @add-subitem="addTask" :task="props.task"/>
 </template>
 
 <style lang="scss" scoped>
@@ -83,6 +88,17 @@ li {
   --btn-bg-color: var(--component-bg);
   --btn-padding: 3px;
   --icon-font-size: 1.6rem;
+}
+
+.btn-detail {
+  --btn-icon-color: var(--icon-color);
+  --icon-font-size: 1.4rem;
+  --btn-size: auto;
+  --btn-padding: .3rem;
+}
+
+.btn-delete {
+  margin-left: auto;
 }
 
 </style>

@@ -15,13 +15,11 @@
     emits('add-subitem', text);
   }
 
-  const handleSubtaskDelete = (id: number) => {
-    emits('delete-task', id, props.task.id);
-  }
-
-  const handleTaskDelete = () => {
-    // @todo open delete confirmation before deleting
-    emits('delete-task', props.task.id);
+  function handleDelete(id: number, parentID: number) {
+    if(!id) {
+      id = props.task.id;
+    }
+    emits('delete-task', id, parentID);
   }
 
   const handleToggleView = () => {
@@ -34,17 +32,19 @@
 <template>
     <div class="container">
       <div class="parent">
-        <CheckableItem :listID="props.task.listID" :item="props.task"/>
+        <CheckableItem :listID="props.task.listID" :item="props.task">
+          <ButtonIcon class="btn-delete" v-if="parentItemID" :action="handleDelete" icon="solar:trash-bin-trash-bold"/>
+        </CheckableItem>
       </div>
       <ul class="subtasks">
         <li v-for="subtask in props.task.subtasks">
-          <CheckableItem :deleteSubtask="handleSubtaskDelete" :parentItemID="props.task.id" :listID="props.task.listID" :item="subtask"/>
+          <CheckableItem @delete-item="handleDelete" :parentItemID="props.task.id" :listID="props.task.listID" :item="subtask"/>
         </li>
         <AddListOverlay @submit="handleSubtaskCreate"/>
       </ul>
       <div class="buttons">
         <ButtonIcon :action="handleToggleView" icon="ep:arrow-left-bold"/>
-        <ButtonIcon :action="handleTaskDelete" icon="solar:trash-bin-trash-bold"/>
+        <ButtonIcon :action="handleDelete" icon="solar:trash-bin-trash-bold"/>
       </div>
     </div>
 </template>

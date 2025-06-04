@@ -18,11 +18,11 @@ $breakpoint-xl: 1200px;
 $breakpoint-xxl: 1400px;
 
 // fonts
-$font-size-base: clamp(1rem, 4vw, 1.4rem);
-$font-size-small: clamp(.45rem, 4vw, 1.25rem);
-$font-size-smallest: clamp(.6rem, 4vw, .8rem);
-$font-size-big: clamp(.7rem, 4vw, 1.4rem);
-$font-size-biggest: clamp(.9rem, 4vw, 1.8rem);
+$font-size-base: clamp(1.125rem, 1.1035rem + 0.0915vw, 1.25rem);
+$font-size-small: clamp(1rem, 0.9785rem + 0.0915vw, 1.125rem);
+$font-size-smallest: clamp(0.75rem, 0.7285rem + 0.0915vw, 0.875rem);
+$font-size-big: clamp(1.375rem, 1.3321rem + 0.1831vw, 1.625rem);
+$font-size-biggest: clamp(1.75rem, 1.7071rem + 0.1831vw, 2rem);
 
 $font-weight-light: 300;
 $font-weight-base: 400;

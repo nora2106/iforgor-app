@@ -9,7 +9,10 @@ export const useListStore = defineStore('list', () => {
         const getListByID = computed(() => (listID: number) => lists.value.find(l => l.id === listID));
         const getListsByType = computed(() => (type: ListType) => lists.value.filter(l => l.type === type));
         const getListCount = computed(() => (type: string) => lists.value.filter(l => l.type === type).length);
-
+        const getCompletedItemCount = computed(() => (id: number) => {
+            const list = lists.value.find(l => l.id === id)
+            return list ? list.items.filter(i => i.checked).length : 0
+        })
 
         // add new list of a certain type
         function addList(name: string, type: ListType) {
@@ -135,7 +138,8 @@ export const useListStore = defineStore('list', () => {
             editSubtask,
             addSubtask,
             deleteSubtask,
-            toggleSubtaskChecked
+            toggleSubtaskChecked,
+            getCompletedItemCount
         }
     },
     {

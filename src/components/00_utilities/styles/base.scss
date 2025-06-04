@@ -52,6 +52,7 @@ body {
 p, a, span, li {
   color: var(--text-color);
   font-family: "Work Sans", sans-serif;
+  font-size: $font-size-base;
 }
 
 li {
@@ -69,5 +70,5 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-weight: $font-weight-bold;
-  font-size: clamp(1.8rem, 4vw, 2.3rem);
+  font-size: $font-size-biggest;
 }

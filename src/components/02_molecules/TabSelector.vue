@@ -1,13 +1,17 @@
 <!-- tab selector to select list type -->
 <script setup lang="ts">
   import {ref} from "vue";
+  import {ListType} from "@/components/00_utilities/types/list";
 
-  const props = defineProps<{ onSelection: Function, options: {name: string; value: string}[]}>();
+  const props = defineProps<{options: {name: string; value: ListType}[]}>();
+  const emit = defineEmits<{
+    (e: 'select', value: ListType): void
+  }>()
   const selectedOption = ref<string>();
 
-  const selectOption = (value: string) => {
+  const selectOption = (value: ListType) => {
     selectedOption.value = value;
-    props.onSelection(value);
+    emit('select', value)
   }
   selectOption(props.options[0].value);
 </script>
@@ -29,6 +33,7 @@
   border-radius: $border-radius-mobile;
   width: 85%;
   max-width: $max-content-with-mobile;
+  margin-top: 1rem;
 }
 
 .tab-button {

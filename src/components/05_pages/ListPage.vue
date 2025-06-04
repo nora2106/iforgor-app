@@ -9,6 +9,7 @@
   import {useI18n} from "vue-i18n";
   import AddListOverlay from "@/components/02_molecules/AddListOverlay.vue";
   import {ref} from "vue";
+  import ShoppingList from "@/components/03_organisms/ShoppingList.vue";
 
   const i18n = useI18n();
   const route = useRoute();
@@ -17,6 +18,7 @@
   const uiStore = useUiStore();
   const list = store.getListByID(listID)
   let type = list?.type;
+  let showTabs = false;
   const tabOptions: {name: string; value: string}[] = [{name: i18n.t("tabs.all-tasks"), value: "allTasks"}, {name: i18n.t("tabs.assigned"), value: "assignedTasks"}]
   const openAddOverlay = ref<boolean>(false)
 
@@ -29,19 +31,28 @@
   }
 
   const buttons: MobileMenuButtons = [{icon: 'mdi:user-add', label: 'add-user', onClick: uiStore.toggleAddUserOverlay}, {icon: 'ph:plus-bold', label: 'add', onClick: toggleAddOverlay }, {icon: 'solar:settings-bold', label: 'settings', onClick: uiStore.toggleSettings}]
+
   uiStore.setMobileButtons(buttons);
+
   if(list && type) {
+    if(type !== 'task') {
+      showTabs = true;
+    }
     // @todo get only unchecked items and differentiate between task items and shopping items
-    uiStore.setCurrentListCount(list.items.length, `item-${type}`);
+    uiStore.setCurrentListData(list.items.length, `item-${type}`);
+  }
+
+  const addItem = (text: string) => {
+    if(list) {
+      store.addItemToList(list.id, text);
+    }
   }
 </script>
 
 <template>
-  <ListLayout :selection="selectTaskTab" v-show="type === 'task'" :options="tabOptions" :title="list.name">
+  <ListLayout :hide="showTabs" :selection="selectTaskTab" :options="tabOptions" :title="list.name">
     <TaskList v-if="type === 'task'" :list="list"/>
-    <div v-if="type === 'shopping'">
-      <p>Shopping list tba.</p>
-    </div>
+    <ShoppingList v-if="type === 'shopping'" :list="list"/>
     <AddListOverlay @submit="addItem" :close="toggleAddItemOverlay" v-show="openAddOverlay"/>
   </ListLayout>
 </template>

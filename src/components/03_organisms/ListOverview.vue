@@ -5,7 +5,7 @@ import {useListStore} from "@/components/00_utilities/stores/listStore";
 import AddListOverlay from "@/components/02_molecules/AddListOverlay.vue";
 import {useUiStore} from "@/components/00_utilities/stores/uiStore";
 import type {List} from "@/components/00_utilities/types/list";
-import ListWrapper from "@/components/02_molecules/ListWrapper.vue";
+import ListWrapper from "@/components/03_organisms/ListWrapper.vue";
 import {MobileMenuButtons} from "@/components/00_utilities/types/general";
 
 const listStore = useListStore();

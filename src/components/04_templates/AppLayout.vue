@@ -3,15 +3,16 @@
 <script setup lang="ts">
 import BottomMenu from "@/components/02_molecules/BottomMenu.vue";
 import {useUiStore} from "@/components/00_utilities/stores/uiStore";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
 const uiStore = useUiStore();
 
 const route = useRoute()
-const isHome = computed(() => route.path === '/')
+const isHome = computed(() => route.name === 'Home');
 const { t } = useI18n()
+let infoText = computed(() => t(`list.list-${uiStore.currentListData.type}`, uiStore.currentListData.count));
 
 </script>
 
@@ -22,9 +23,10 @@ const { t } = useI18n()
           <Icon icon="ep:arrow-left-bold" />
         </router-link>
       <div class="title-wrapper">
-        <h1 v-if="uiStore.currentTitle">{{ t(uiStore.currentTitle) }}</h1>
-        <p>{{ t(`list.list-${uiStore.currentListCount.type}`, uiStore.currentListCount.count) }}</p>
+        <h1 v-if="uiStore.currentTitle">{{ uiStore.currentTitle }}</h1>
+        <p>{{infoText}}</p>
       </div>
+      <span class="item-count">{{"1/" + uiStore.currentListCount.count}}</span>
     </header>
     <main>
       <slot/>
@@ -46,6 +48,13 @@ const { t } = useI18n()
   h1, p {
     margin: 0;
   }
+}
+
+.item-count {
+  font-weight: $font-weight-bolder;
+  font-size: $font-size-big;
+  margin-left: auto;
+  margin-top: 3px;
 }
 
 header {

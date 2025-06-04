@@ -32,9 +32,9 @@ export const useUiStore = defineStore('ui', () => {
         currentTitle.value = title;
     }
 
-    const currentListCount = ref<{count: number, type: 'list' | 'recipe' |'task' | 'item-task' | 'item-shopping'}>({count: 0, type: 'list'});
-    function setCurrentListCount(Count: number, Type: 'list' | 'recipe' |'task' | 'item-task' | 'item-shopping') {
-        currentListCount.value = {count: Count, type: Type};
+    const currentListData = ref<{count: number, type: 'list' | 'recipe' |'task' | 'item-task' | 'item-shopping'}>({count: 0, type: 'list'});
+    function setCurrentListData(Count: number, Type: 'list' | 'recipe' |'task' | 'item-task' | 'item-shopping') {
+        currentListData.value = {count: Count, type: Type};
     }
 
     return {
@@ -50,7 +50,7 @@ export const useUiStore = defineStore('ui', () => {
         toggleAddUserOverlay,
         currentTitle,
         setCurrentTitle,
-        currentListCount,
-        setCurrentListCount
+        currentListData,
+        setCurrentListData
     }
 });
