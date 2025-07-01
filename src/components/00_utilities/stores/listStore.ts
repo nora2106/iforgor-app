@@ -1,9 +1,11 @@
 import {defineStore} from 'pinia'
 import {computed, ref} from "vue";
 import type {List, SubTask, TaskItem, ListType} from '../types/list'
+import {useUiStore} from "@/components/00_utilities/stores/uiStore";
 
 export const useListStore = defineStore('list', () => {
         const lists = ref<List[]>([]);
+        const uiStore = useUiStore();
 
         // getters
         const getListByID = computed(() => (listID: number) => lists.value.find(l => l.id === listID));
@@ -53,12 +55,15 @@ export const useListStore = defineStore('list', () => {
 
         // toggle the item completion state
         function toggleItemChecked(listID: number, itemID: number) {
-            console.log('check')
             const list = lists.value.find(l => l.id === listID);
             const item = list?.items.find(i => i.id === itemID);
             if (item) {
                 item.checked = !item.checked;
+                if(uiStore.currentListData) {
+                    uiStore.setCurrentListData(uiStore.currentListData.type, uiStore.currentListData?.title, uiStore.currentListData?.count, getCompletedItemCount(listID).value)
+                }
             }
+
         }
 
         // edit content or values of a list item (shopping or task)
