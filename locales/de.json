@@ -21,8 +21,8 @@
     "title-recipe": "Rezepte",
     "list-list": " {count} Liste | {count} Listen",
     "list-recipe": "{count} Rezept | {count} Rezepte",
-    "list-item-task": "{count} ausstehende Aufgabe | {count} ausstehende Aufgaben",
-    "list-item-shopping": "{count} ausstehende Aufgabe | {count} ausstehende Aufgaben",
+    "list-item-task": "{count} Aufgabe | {count} Aufgaben",
+    "list-item-shopping": "{count} Item | {count} Items",
     "list-collaborators": "{count} Teilnehmer*in | {count} Teilnehmer*innen"
   }
 }

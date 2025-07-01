@@ -17,28 +17,26 @@ const listsByType = computed(() => {
   switch (uiStore.activeListType) {
     case 'task':
     case 'shopping':
-      uiStore.setCurrentListData(listStore.getListsByType(uiStore.activeListType).length, 'list');
+      uiStore.setCurrentListOverview(uiStore.activeListType, i18n.t(`list.title-${uiStore.activeListType}`), listStore.getListsByType(uiStore.activeListType).length);
       return listStore.getListsByType(uiStore.activeListType)
     case 'recipe':
-      uiStore.setCurrentListData(0, uiStore.activeListType);
+      uiStore.setCurrentListOverview('recipe', i18n.t(`list.title-${uiStore.activeListType}`), 0);
+      // add recipe store and return recipes
       break;
-      // add recipe store
     default:
       return [];
   }
 })
+uiStore.setActiveContext("overview");
 
-const selectListType = (value: ListType) => {
-  uiStore.setActiveListType(value);
-  uiStore.setCurrentTitle(i18n.t(`list.title-${value}`));
-}
+const selectListType = (value: ListType) => uiStore.setActiveListType(value)
 
 const options: {name: string; value: TypeSelection}[] = [{name: i18n.t("tabs.task"), value: "task"}, {name: i18n.t("tabs.shopping"), value: "shopping"}, {name: i18n.t("tabs.recipes"), value: "recipe"}]
 
 </script>
 
 <template>
-  <ListLayout :selection="selectListType" :options="options" :title="''">
+  <ListLayout :showTabs="true" :selection="selectListType" :options="options" :title="''">
     <ListOverview :lists="listsByType"/>
   </ListLayout>
 </template>

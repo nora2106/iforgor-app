@@ -23,7 +23,7 @@
   const openAddOverlay = ref<boolean>(false)
 
   const selectTaskTab = (value: string) => {
-
+    // select either all tasks or assigned tasks (if collaboration)
   }
 
   const toggleAddOverlay = () => {
@@ -33,13 +33,13 @@
   const buttons: MobileMenuButtons = [{icon: 'mdi:user-add', label: 'add-user', onClick: uiStore.toggleAddUserOverlay}, {icon: 'ph:plus-bold', label: 'add', onClick: toggleAddOverlay }, {icon: 'solar:settings-bold', label: 'settings', onClick: uiStore.toggleSettings}]
 
   uiStore.setMobileButtons(buttons);
+  uiStore.setActiveContext("list");
 
   if(list && type) {
-    if(type !== 'task') {
-      showTabs = true;
-    }
-    // @todo get only unchecked items and differentiate between task items and shopping items
-    uiStore.setCurrentListData(list.items.length, `item-${type}`);
+    // @todo show tabs if collaboration
+    // showTabs = true;
+
+    uiStore.setCurrentListData( `item-${type}`, list.name, list.items.length, store.getCompletedItemCount(list.id).value);
   }
 
   const addItem = (text: string) => {
@@ -50,7 +50,7 @@
 </script>
 
 <template>
-  <ListLayout :hide="showTabs" :selection="selectTaskTab" :options="tabOptions" :title="list.name">
+  <ListLayout :showTabs="showTabs" :selection="selectTaskTab" :options="tabOptions" :title="list.name">
     <TaskList v-if="type === 'task'" :list="list"/>
     <ShoppingList v-if="type === 'shopping'" :list="list"/>
     <AddListOverlay @submit="addItem" :close="toggleAddItemOverlay" v-show="openAddOverlay"/>

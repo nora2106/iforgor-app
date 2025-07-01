@@ -12,8 +12,24 @@ const uiStore = useUiStore();
 const route = useRoute()
 const isHome = computed(() => route.name === 'Home');
 const { t } = useI18n()
-let infoText = computed(() => t(`list.list-${uiStore.currentListData.type}`, uiStore.currentListData.count));
+const currentListData = computed(() =>
+  uiStore.activeContext === 'overview'
+      ? uiStore.currentListOverview ?? { count: 0, type: 'task', title: '' }
+      : uiStore.currentListData ?? { count: 0, checkedCount: 0, type: 'task', title: '' }
+);
 
+let infoText = computed(() => {
+  if(uiStore.activeContext === 'overview') {
+    if(currentListData.value.type !== 'recipe') {
+      return t(`list.list-list`, currentListData.value.count)
+    }
+    else {
+      return t(`list.list-recipe`, currentListData.value.count)
+    }
+  }
+  return t(`list.list-${currentListData.value.type}`, currentListData.value.count)
+})
+// @todo change text to collaborators after adding the feature
 </script>
 
 <template>
@@ -23,10 +39,10 @@ let infoText = computed(() => t(`list.list-${uiStore.currentListData.type}`, uiS
           <Icon icon="ep:arrow-left-bold" />
         </router-link>
       <div class="title-wrapper">
-        <h1 v-if="uiStore.currentTitle">{{ uiStore.currentTitle }}</h1>
+        <h1 v-if="currentListData.title">{{ currentListData.title }}</h1>
         <p>{{infoText}}</p>
       </div>
-      <span class="item-count">{{"1/" + uiStore.currentListCount.count}}</span>
+      <span v-if="currentListData.checkedCount != undefined" class="item-count">{{ currentListData.checkedCount + "/" + currentListData.count}}</span>
     </header>
     <main>
       <slot/>

@@ -27,26 +27,20 @@
     }
   }
 
-  const deleteTask = (id: number, parentID?: number) => {
+  const deleteTask = (subtaskID?: number) => {
     // is subtask
-    if(parentID) {
-      store.deleteSubtask(props.task.listID, parentID, id);
+    if(subtaskID) {
+      store.deleteSubtask(props.task.listID, subtaskID, props.task.id);
     }
     // is task
     else {
-      store.deleteItem(props.task.listID, id);
+      store.deleteItem(props.task.listID, props.task.id);
+      toggleDetailView();
     }
   }
 
-  const addTask = (text: string, parentID?: number) => {
-    // is subtask
-    if(parentID) {
-      store.addSubtask(props.task.listID, parentID, text);
-    }
-    // is task
-    else {
-      store.addItemToList(props.task.listID, text);
-    }
+  const addSubtask = (text: string) => {
+    store.addSubtask(props.task.listID, props.task.id, text);
   }
 
   const editTask = (itemID: number, newText: string, parentItemID?: number) => {
@@ -68,7 +62,7 @@
       <ButtonIcon class="btn-detail" :action="toggleDetailView" icon="bi:three-dots"/>
     </CheckableItem>
   </li>
-  <TaskDetail @delete-task="deleteTask" v-show="showDetail" @toggle-view="toggleDetailView" @add-subitem="addTask" :task="props.task"/>
+  <TaskDetail @delete-task="deleteTask" v-show="showDetail" @toggle-view="toggleDetailView" @add-subitem="addSubtask" :task="props.task"/>
 </template>
 
 <style lang="scss" scoped>

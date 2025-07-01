@@ -2,18 +2,15 @@
 <!-- contains list overview, title bar, tab selector sidebar-->
 <script setup lang="ts">
 import TabSelector from "@/components/02_molecules/TabSelector.vue";
-import {useUiStore} from "@/components/00_utilities/stores/uiStore";
 import {ListType} from "@/components/00_utilities/types/list";
 
-const props = defineProps<{hide?: boolean, selection: (value: ListType) => void, title: string, options?: {name: string; value: ListType}[]}>();
-const uiStore = useUiStore();
+const props = defineProps<{showTabs: boolean, selection: (value: ListType) => void, title: string, options?: {name: string; value: ListType}[]}>();
 
-uiStore.setCurrentTitle(props.title);
 </script>
 
 <template>
     <div class="list-wrapper">
-      <TabSelector v-if="!hide" @select="selection" :options="options"/>
+      <TabSelector v-if="showTabs" @select="selection" :options="options"/>
       <slot/>
     </div>
 </template>

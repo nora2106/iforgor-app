@@ -7,6 +7,9 @@ export const useUiStore = defineStore('ui', () => {
     const activeListType = ref<TypeSelection>('task');
     function setActiveListType (type: ListType) { activeListType.value = type}
 
+    const activeContext = ref<'overview' | 'list'>('overview')
+    function setActiveContext (context: 'overview' | 'list') {activeContext.value = context}
+
     const mobileButtons = ref<MobileMenuButtons>();
     function setMobileButtons(btns: MobileMenuButtons) {
         mobileButtons.value = btns;
@@ -27,14 +30,23 @@ export const useUiStore = defineStore('ui', () => {
         settingsOpen.value = !addUserOverlayOpen;
     }
 
-    const currentTitle = ref('');
-    function setCurrentTitle(title: string) {
-        currentTitle.value = title;
+    const currentListOverview = ref<{
+        type: TypeSelection,
+        title: string
+        count: number,
+    }>({type: 'task', title: '', count: 0})
+    function setCurrentListOverview(Type: TypeSelection, Title: string, Count: number) {
+        currentListOverview.value = {type: Type, title: Title, count: Count};
     }
 
-    const currentListData = ref<{count: number, type: 'list' | 'recipe' |'task' | 'item-task' | 'item-shopping'}>({count: 0, type: 'list'});
-    function setCurrentListData(Count: number, Type: 'list' | 'recipe' |'task' | 'item-task' | 'item-shopping') {
-        currentListData.value = {count: Count, type: Type};
+    const currentListData = ref<{
+        type: 'list' |'item-task' | 'item-shopping' | 'recipe',
+        title: string
+        count: number,
+        checkedCount: number
+    }>()
+    function setCurrentListData(Type: 'list' |'item-task' | 'item-shopping' | 'recipe', Title: string, Count: number, CheckedItems: number) {
+        currentListData.value = {type: Type, title: Title, count: Count, checkedCount: CheckedItems};
     }
 
     return {
@@ -48,9 +60,11 @@ export const useUiStore = defineStore('ui', () => {
         toggleSettings,
         addUserOverlayOpen,
         toggleAddUserOverlay,
-        currentTitle,
-        setCurrentTitle,
         currentListData,
-        setCurrentListData
+        setCurrentListData,
+        currentListOverview,
+        setCurrentListOverview,
+        activeContext,
+        setActiveContext
     }
 });

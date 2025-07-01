@@ -14,8 +14,6 @@ const addItem = (text: string) => {
   store.addItemToList(props.list.id, text);
 }
 
-
-
 </script>
 
 <template>

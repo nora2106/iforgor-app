@@ -9,7 +9,6 @@ import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 const props = defineProps<{ item: ListItem, listID: number, parentItemID?: number, toggleDetail?: void }>();
 
 const emits = defineEmits<{
-  (e: 'delete-item', id: number, parentID?: number): void;
   (e: 'toggle-checked', id: number, parentID?: number): void;
 }>();
 
@@ -18,10 +17,6 @@ const isChecked = ref<boolean>(computed(() => props.item.checked).value);
 const toggleEdit = () => {
   console.log('edit');
   // open edit window
-}
-
-const handleDelete = () => {
-  emits('delete-item', props.item.id, props.parentItemID);
 }
 
 watch(isChecked, () => {

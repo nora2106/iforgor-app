@@ -7,19 +7,20 @@
 
   const props = defineProps<{ task: TaskItem }>();
   const emits = defineEmits<{
-    (e: 'add-subitem', text: string): void;
-    (e: 'delete-task', id: number, parentID?: number): void;
+    (e: 'add-subitem', text: string, parentID: number): void;
+    (e: 'delete-task', subtaskID?: number): void;
     (e: 'toggle-view'): void;
   }>();
-  const handleSubtaskCreate = (text: string) => {
-    emits('add-subitem', text);
+  const handleSubtaskCreate = (text: string, parentID: number) => {
+    emits('add-subitem', text, parentID);
   }
 
-  function handleDelete(id: number, parentID: number) {
-    if(!id) {
-      id = props.task.id;
-    }
-    emits('delete-task', id, parentID);
+  function handleDelete() {
+    emits('delete-task', props.task.id);
+  }
+
+  function handleSubtaskDelete(subtaskID?: number) {
+    emits('delete-task', subtaskID);
   }
 
   const handleToggleView = () => {
@@ -32,13 +33,13 @@
 <template>
     <div class="container">
       <div class="parent">
-        <CheckableItem :listID="props.task.listID" :item="props.task">
-          <ButtonIcon class="btn-delete" v-if="parentItemID" :action="handleDelete" icon="solar:trash-bin-trash-bold"/>
-        </CheckableItem>
+        <CheckableItem :listID="props.task.listID" :item="props.task"/>
       </div>
       <ul class="subtasks">
         <li v-for="subtask in props.task.subtasks">
-          <CheckableItem @delete-item="handleDelete" :parentItemID="props.task.id" :listID="props.task.listID" :item="subtask"/>
+          <CheckableItem :parentItemID="props.task.id" :listID="props.task.listID" :item="subtask">
+            <ButtonIcon class="btn-delete" :action="handleSubtaskDelete" icon="solar:trash-bin-trash-bold"/>
+          </CheckableItem>
         </li>
         <AddListOverlay @submit="handleSubtaskCreate"/>
       </ul>
@@ -76,6 +77,10 @@ li {
   --btn-icon-color: var(--icon-color);
   --btn-padding: 3px;
   --icon-font-size: 1.4rem;
+
+  .btn-delete {
+    margin-left: auto;
+  }
 }
 
 .buttons {

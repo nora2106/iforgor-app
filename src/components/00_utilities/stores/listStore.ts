@@ -9,10 +9,12 @@ export const useListStore = defineStore('list', () => {
         const getListByID = computed(() => (listID: number) => lists.value.find(l => l.id === listID));
         const getListsByType = computed(() => (type: ListType) => lists.value.filter(l => l.type === type));
         const getListCount = computed(() => (type: string) => lists.value.filter(l => l.type === type).length);
-        const getCompletedItemCount = computed(() => (id: number) => {
-            const list = lists.value.find(l => l.id === id)
-            return list ? list.items.filter(i => i.checked).length : 0
-        })
+        function getCompletedItemCount(id: number) {
+            return computed(() => {
+                const list = lists.value.find(l => l.id === id)
+                return list ? list.items.filter(i => i.checked).length : 0
+            })
+        }
 
         // add new list of a certain type
         function addList(name: string, type: ListType) {
@@ -51,6 +53,7 @@ export const useListStore = defineStore('list', () => {
 
         // toggle the item completion state
         function toggleItemChecked(listID: number, itemID: number) {
+            console.log('check')
             const list = lists.value.find(l => l.id === listID);
             const item = list?.items.find(i => i.id === itemID);
             if (item) {
@@ -119,6 +122,7 @@ export const useListStore = defineStore('list', () => {
         function deleteSubtask(listID: number, itemID: number, subtaskID: number) {
             const list = lists.value.find(l => l.id === listID);
             const item = list?.items.find((i): i is TaskItem => i.type === 'task' && i.id === itemID);
+            console.log(item)
             const subtask = item?.subtasks.find(i => i.id === subtaskID);
             if(item && subtask) {
                 item.subtasks = item.subtasks.filter(subtask => subtask.id !== subtaskID);
