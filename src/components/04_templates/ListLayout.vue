@@ -10,7 +10,7 @@ const props = defineProps<{showTabs: boolean, selection: (value: ListType) => vo
 
 <template>
     <div class="list-wrapper">
-      <TabSelector v-if="showTabs" @select="selection" :options="options"/>
+      <TabSelector v-if="showTabs" @select="props.selection" :options="options"/>
       <slot/>
     </div>
 </template>

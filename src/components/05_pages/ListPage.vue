@@ -53,7 +53,7 @@
   <ListLayout :showTabs="showTabs" :selection="selectTaskTab" :options="tabOptions" :title="list.name">
     <TaskList v-if="type === 'task'" :list="list"/>
     <ShoppingList v-if="type === 'shopping'" :list="list"/>
-    <AddListOverlay @submit="addItem" :close="toggleAddItemOverlay" v-show="openAddOverlay"/>
+    <AddListOverlay @submit="addItem" :close="toggleAddOverlay" v-show="openAddOverlay"/>
   </ListLayout>
 </template>
 

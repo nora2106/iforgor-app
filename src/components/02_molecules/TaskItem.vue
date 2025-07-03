@@ -58,7 +58,7 @@
 
 <template>
   <li>
-    <CheckableItem @delete-item="deleteTask" @toggle-checked="toggleTaskCompleted" :listID="props.task.listID" :item="props.task">
+    <CheckableItem @toggle-checked="toggleTaskCompleted" :listID="props.task.listID" :item="props.task">
       <ButtonIcon class="btn-detail" :action="toggleDetailView" icon="bi:three-dots"/>
     </CheckableItem>
   </li>

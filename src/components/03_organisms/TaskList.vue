@@ -18,7 +18,7 @@ const addItem = (text: string) => {
 
 <template>
   <ListWrapper>
-    <TaskItem @toggleCheckedItem="toggleItemCompleted" :task="task" v-for="task in tasks" :key="task.id">
+    <TaskItem :task="task" v-for="task in tasks" :key="task.id">
       {{task.text}}
     </TaskItem>
   </ListWrapper>

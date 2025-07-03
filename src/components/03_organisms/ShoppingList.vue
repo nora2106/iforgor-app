@@ -9,15 +9,12 @@ import ShoppingItem from "@/components/02_molecules/ShoppingItem.vue";
 
 const props = defineProps<{ list: List }>();
 const items = computed(() => props.list.items);
-const store = useListStore();
-
-
 
 </script>
 
 <template>
   <ListWrapper>
-    <ShoppingItem @toggleCheckedItem="toggleItemCompleted" :item="item" v-for="item in items" :key="item.id">
+    <ShoppingItem :item="item" v-for="item in items" :key="item.id">
       {{item.text}}
     </ShoppingItem>
   </ListWrapper>
