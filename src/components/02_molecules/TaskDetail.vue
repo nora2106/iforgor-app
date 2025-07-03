@@ -9,6 +9,7 @@
   const emits = defineEmits<{
     (e: 'add-subitem', text: string, parentID: number): void;
     (e: 'delete-task', subtaskID?: number): void;
+    (e: 'edit', id: number, text: string, parentID?: number): void;
     (e: 'toggle-view'): void;
   }>();
   const handleSubtaskCreate = (text: string, parentID: number) => {
@@ -16,7 +17,7 @@
   }
 
   function handleDelete() {
-    emits('delete-task', props.task.id);
+    emits('delete-task');
   }
 
   function handleSubtaskDelete(subtaskID?: number) {
@@ -27,18 +28,21 @@
     emits('toggle-view');
   }
 
+  const handleEdit = (id: number, text: string, parentID?: number) => {
+    emits('edit', id, text, parentID );
+  }
 
 </script>
 
 <template>
     <div class="container">
       <div class="parent">
-        <CheckableItem :listID="props.task.listID" :item="props.task"/>
+        <CheckableItem :editable="true" :listID="props.task.listID" :item="props.task"/>
       </div>
       <ul class="subtasks">
         <li v-for="subtask in props.task.subtasks">
-          <CheckableItem :parentItemID="props.task.id" :listID="props.task.listID" :item="subtask">
-            <ButtonIcon class="btn-delete" :action="handleSubtaskDelete" icon="solar:trash-bin-trash-bold"/>
+          <CheckableItem :editable="true" @edit="handleEdit" :parentItemID="props.task.id" :listID="props.task.listID" :item="subtask">
+            <ButtonIcon class="btn-delete" :action="() => handleSubtaskDelete(subtask.id)" icon="solar:trash-bin-trash-bold"/>
           </CheckableItem>
         </li>
         <AddListOverlay @submit="handleSubtaskCreate"/>

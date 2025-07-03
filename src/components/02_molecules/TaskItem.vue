@@ -15,7 +15,6 @@
     showDetail.value = !showDetail.value;
   }
 
-  // @todo watch changes in store
   const toggleTaskCompleted = (itemID: number, parentID?: number) => {
     // is subtask
     if(parentID) {
@@ -30,7 +29,7 @@
   const deleteTask = (subtaskID?: number) => {
     // is subtask
     if(subtaskID) {
-      store.deleteSubtask(props.task.listID, subtaskID, props.task.id);
+      store.deleteSubtask(props.task.listID, props.task.id, subtaskID);
     }
     // is task
     else {
@@ -58,11 +57,11 @@
 
 <template>
   <li>
-    <CheckableItem @toggle-checked="toggleTaskCompleted" :listID="props.task.listID" :item="props.task">
+    <CheckableItem @edit="editTask" @toggle-checked="toggleTaskCompleted" :listID="props.task.listID" :item="props.task">
       <ButtonIcon class="btn-detail" :action="toggleDetailView" icon="bi:three-dots"/>
     </CheckableItem>
   </li>
-  <TaskDetail @delete-task="deleteTask" v-show="showDetail" @toggle-view="toggleDetailView" @add-subitem="addSubtask" :task="props.task"/>
+  <TaskDetail @edit="editTask" @delete-task="deleteTask" v-show="showDetail" @toggle-view="toggleDetailView" @add-subitem="addSubtask" :task="props.task"/>
 </template>
 
 <style lang="scss" scoped>

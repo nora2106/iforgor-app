@@ -6,17 +6,21 @@ import {useListStore} from "@/components/00_utilities/stores/listStore";
 import { isRegExp } from "@vue/shared";
 import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 
-const props = defineProps<{ item: ListItem, listID: number, parentItemID?: number, toggleDetail?: void }>();
-
+const props = defineProps<{ item: ListItem, listID: number, parentItemID?: number, toggleDetail?: void, editable?: boolean }>();
 const emits = defineEmits<{
   (e: 'toggle-checked', id: number, parentID?: number): void;
+  (e: 'edit', id: number, text: string, parentID?: number): void;
 }>();
 
+const { editable = false } = props
 const isChecked = ref<boolean>(computed(() => props.item.checked).value);
+const textContent = ref< HTMLElement | null >(null);
 
-const toggleEdit = () => {
-  console.log('edit');
-  // open edit window
+function validate(event : Event) {
+  (event.target as HTMLInputElement).blur()
+  if(textContent.value && textContent.value instanceof HTMLElement) {
+    emits('edit', props.item.id, textContent.value.innerText.trim(), props.parentItemID)
+  }
 }
 
 watch(isChecked, () => {
@@ -29,7 +33,8 @@ watch(isChecked, () => {
 
 <template>
     <input class="checkbox" v-model="isChecked" :id="props.item.id" type="checkbox">
-    <span>{{props.item.text}}</span>
+    <span v-if="editable" ref="textContent" @focusout="validate" @keydown.enter="validate" contenteditable spellcheck="false">{{props.item.text}}</span>
+    <span v-if="!editable">{{props.item.text}}</span>
     <slot/>
 </template>
 

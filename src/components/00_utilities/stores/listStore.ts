@@ -126,10 +126,8 @@ export const useListStore = defineStore('list', () => {
         // delete a subtask from a task item
         function deleteSubtask(listID: number, itemID: number, subtaskID: number) {
             const list = lists.value.find(l => l.id === listID);
-            const item = list?.items.find((i): i is TaskItem => i.type === 'task' && i.id === itemID);
-            console.log(item)
-            const subtask = item?.subtasks.find(i => i.id === subtaskID);
-            if(item && subtask) {
+            const item = list?.items.find(i => i.id === itemID);
+            if(item && item.type === 'task') {
                 item.subtasks = item.subtasks.filter(subtask => subtask.id !== subtaskID);
             }
         }
