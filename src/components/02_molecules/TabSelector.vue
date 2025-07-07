@@ -31,9 +31,16 @@
   background-color: var(--element-color);
   padding: .4rem .5rem;
   border-radius: $border-radius-mobile;
-  width: 85%;
+  width: 90%;
   max-width: $max-content-with-mobile;
   margin-top: 1rem;
+
+  @media(min-width: $breakpoint-md) {
+    flex-direction: column;
+    background-color: transparent;
+    padding: 2rem 1rem;
+    margin: 0;
+  }
 }
 
 .tab-button {
@@ -45,6 +52,16 @@
   font-size: $font-size-small;
   font-family: "Lexend", sans-serif;
   flex-basis: 100%;
+
+  @media(min-width: $breakpoint-md) {
+    background-color: transparent;
+    padding: 1rem 1.3rem;
+  }
+
+  &:hover {
+    background-color: var(--element-color);
+    cursor: pointer;
+  }
 
   &.active {
     background-color: $pink;

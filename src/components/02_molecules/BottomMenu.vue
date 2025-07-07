@@ -34,7 +34,7 @@ defineProps<{btns: MobileMenuButtons}>();
     transform: scale(1.1);
   }
 
-  @media(min-width: $breakpoint-sm) {
+  @media(min-width: $breakpoint-md) {
     display: none;
   }
 }
