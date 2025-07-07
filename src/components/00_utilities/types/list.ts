@@ -21,8 +21,7 @@ export interface TaskItem extends BaseListItem {
 
 export interface ShoppingItem extends BaseListItem {
     type: 'shopping';
-    quantity?: number;
-    unit?: string;
+    quantity?: string;
 }
 
 export type ListItem = TaskItem | ShoppingItem;

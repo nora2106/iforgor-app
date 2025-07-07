@@ -42,14 +42,14 @@
     store.addSubtask(props.task.listID, props.task.id, text);
   }
 
-  const editTask = (itemID: number, newText: string, parentItemID?: number) => {
+  const editTask = (newText: string, parentItemID?: number) => {
     // is subtask
     if(parentItemID) {
-      store.editSubtask(props.task.listID, parentItemID, itemID, newText);
+      store.editSubtask(props.task.listID, parentItemID, props.task.id, newText);
     }
     // is item
     else {
-      store.editListItem(props.task.listID, itemID, newText);
+      store.editListItem(props.task.listID, props.task.id, newText);
     }
   }
 
@@ -57,6 +57,7 @@
 
 <template>
   <li>
+<!--    @todo update item text on edit-->
     <CheckableItem @edit="editTask" @toggle-checked="toggleTaskCompleted" :listID="props.task.listID" :item="props.task">
       <ButtonIcon class="btn-detail" :action="toggleDetailView" icon="bi:three-dots"/>
     </CheckableItem>

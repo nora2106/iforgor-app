@@ -9,7 +9,7 @@ import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 const props = defineProps<{ item: ListItem, listID: number, parentItemID?: number, toggleDetail?: void, editable?: boolean }>();
 const emits = defineEmits<{
   (e: 'toggle-checked', id: number, parentID?: number): void;
-  (e: 'edit', id: number, text: string, parentID?: number): void;
+  (e: 'edit', text: string, parentID?: number): void;
 }>();
 
 const { editable = false } = props
@@ -19,7 +19,7 @@ const textContent = ref< HTMLElement | null >(null);
 function validate(event : Event) {
   (event.target as HTMLInputElement).blur()
   if(textContent.value && textContent.value instanceof HTMLElement) {
-    emits('edit', props.item.id, textContent.value.innerText.trim(), props.parentItemID)
+    emits('edit', textContent.value.innerText.trim(), props.parentItemID)
   }
 }
 

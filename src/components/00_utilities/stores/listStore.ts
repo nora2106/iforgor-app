@@ -67,7 +67,7 @@ export const useListStore = defineStore('list', () => {
         }
 
         // edit content or values of a list item (shopping or task)
-        function editListItem(listID: number, itemID: number, newText?: string, quantity?: number) {
+        function editListItem(listID: number, itemID: number, newText?: string, quantity?: string) {
             const list = lists.value.find(l => l.id === listID);
             const item = list?.items.find(i => i.id === itemID);
             if (!item) {
@@ -79,10 +79,10 @@ export const useListStore = defineStore('list', () => {
                     item.text = newText;
                 }
             } else {
-                // @todo add unit edit
                 if(newText) {
                     item.text = newText;
                 }
+                // @todo add unit edit
                 if(quantity) {
                     item.quantity = quantity;
                 }
