@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {computed, ref} from 'vue';
 import ListPreview from "@/components/01_atoms/ListPreview.vue";
 import {useListStore} from "@/components/00_utilities/stores/listStore";
 import AddListOverlay from "@/components/02_molecules/AddListOverlay.vue";
@@ -7,11 +7,14 @@ import {useUiStore} from "@/components/00_utilities/stores/uiStore";
 import type {List} from "@/components/00_utilities/types/list";
 import ListWrapper from "@/components/03_organisms/ListWrapper.vue";
 import {MobileMenuButtons} from "@/components/00_utilities/types/general";
+import {useI18n} from "vue-i18n";
 
 const listStore = useListStore();
 const uiStore = useUiStore();
 const openOverlay = ref<boolean>(false)
 const props = defineProps<{ lists: List[] }>();
+const { t } = useI18n();
+const listType = computed( () => t(`titles.title-${uiStore.activeListType}`));
 
 const toggleAddListOverlay = () => {
   openOverlay.value = !openOverlay.value;
@@ -41,7 +44,7 @@ function openSettings() {
 </script>
 
 <template>
-    <p v-if="!lists || lists.length === 0">No lists available</p>
+    <p v-if="!lists || lists.length === 0">{{ t('list.no-lists', {type: listType}) }}</p>
     <ListWrapper>
       <router-link class="list-item__link" v-for="list in lists" :to="'/list/' + list.id" :key="list.id">
         <ListPreview>

@@ -17,10 +17,10 @@ const listsByType = computed(() => {
   switch (uiStore.activeListType) {
     case 'task':
     case 'shopping':
-      uiStore.setCurrentListOverview(uiStore.activeListType, i18n.t(`list.title-${uiStore.activeListType}`), listStore.getListsByType(uiStore.activeListType).length);
+      uiStore.setCurrentListOverview(uiStore.activeListType, i18n.t(`titles.title-${uiStore.activeListType}`), listStore.getListsByType(uiStore.activeListType).length);
       return listStore.getListsByType(uiStore.activeListType)
     case 'recipe':
-      uiStore.setCurrentListOverview('recipe', i18n.t(`list.title-${uiStore.activeListType}`), 0);
+      uiStore.setCurrentListOverview('recipe', i18n.t(`titles.title-${uiStore.activeListType}`), 0);
       // add recipe store and return recipes
       break;
     default:

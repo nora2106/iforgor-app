@@ -14,7 +14,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="list-wrapper">
+  <div class="list-content-wrapper">
     <div class="list__tab-wrapper">
       <TabSelector v-if="showTabs" @select="props.selection" :options="options"/>
     </div>
@@ -26,59 +26,44 @@ const props = defineProps<{
 
 <style lang="scss" scoped>
 
-.list-wrapper {
+.list-content-wrapper {
+  background-color: var(--component-bg);
+  border-radius: $border-radius-mobile;
+  margin: 1rem;
+}
+
+.list__list-wrapper {
+  width: 100%;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--component-bg);
-  min-height: 75%;
   border-radius: $border-radius-mobile;
-  margin-inline: 1rem;
-
-  @media(min-width: $breakpoint-sm) {
-    width: 80%;
-    margin: 0 auto;
-  }
+  padding: 2rem;
 
   @media(min-width: $breakpoint-md) {
-    background-color: transparent;
-    flex-direction: row;
-    gap: 4rem;
-    margin: 4rem;
+    background-color: var(--component-bg);
+    max-width: 65rem;
     align-items: flex-start;
-    justify-content: flex-start;
   }
+}
 
-  .list__list-wrapper {
-    width: 100%;
-    height: 75vh;
-    min-height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: $border-radius-mobile;
-    padding: 2rem;
+.list__tab-spacer {
+  width: 100%;
+  flex: 1;
+}
 
-    @media(min-width: $breakpoint-md) {
-      background-color: var(--component-bg);
-      max-width: 65rem;
-      margin: 0 auto;
-      align-items: flex-start;
-    }
-  }
+.list__tab-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: $border-radius-mobile;
+  margin-left: auto;
 
-  .list__tab-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: $border-radius-mobile;
-    flex: 1;
-
-    @media(min-width: $breakpoint-md) {
-      background-color: var(--component-bg);
-      max-width: 16rem;
-    }
+  @media(min-width: $breakpoint-md) {
+    background-color: var(--component-bg);
+    max-width: 16rem;
   }
 }
 

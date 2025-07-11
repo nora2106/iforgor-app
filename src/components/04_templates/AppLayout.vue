@@ -11,10 +11,10 @@ const uiStore = useUiStore();
 <template>
   <div class="app-layout">
     <header>
-<!--        profile button-->
 <!--        language switch-->
     </header>
-    <main>
+    <main class="layout-grid">
+      <p>Profile</p>
       <PageHeader/>
       <slot/>
     </main>
@@ -25,4 +25,19 @@ const uiStore = useUiStore();
 </template>
 
 <style lang="scss" scoped>
+
+.layout-grid {
+  @media(min-width: $breakpoint-md) {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: .5fr 1.5fr;
+    grid-template-rows: auto auto;
+    align-items: flex-start;
+    grid-gap: 4rem;
+
+    &::v-deep(.list-content-wrapper) {
+      display: contents;
+    }
+  }
+}
 </style>

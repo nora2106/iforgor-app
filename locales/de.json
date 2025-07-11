@@ -12,17 +12,20 @@
     "instruction": "Anleitung",
     "tags": "Tags"
   },
+  "titles": {
+    "title-task": "To-Do-Listen",
+    "title-shopping": "Shopping-Listen",
+    "title-recipe": "Rezepte"
+  },
   "list": {
     "create-list": "Neue Liste",
     "add-task": "Neue Aufgabe",
     "add-subtask": "Neue Teilaufgabe",
-    "title-task": "To-Do-Listen",
-    "title-shopping": "Shopping-Listen",
-    "title-recipe": "Rezepte",
     "list-list": " {count} Liste | {count} Listen",
     "list-recipe": "{count} Rezept | {count} Rezepte",
     "list-item-task": "{count} Aufgabe | {count} Aufgaben",
     "list-item-shopping": "{count} Item | {count} Items",
-    "list-collaborators": "{count} Teilnehmer*in | {count} Teilnehmer*innen"
+    "list-collaborators": "{count} Teilnehmer*in | {count} Teilnehmer*innen",
+    "no-lists": "Keine {type} vorhanden."
   }
 }
