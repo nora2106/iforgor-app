@@ -52,7 +52,7 @@ let infoText = computed(() => {
 
   @media(min-width: $breakpoint-md) {
     background-color: var(--component-bg);
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
     max-width: 65rem;
     width: 100%;
   }

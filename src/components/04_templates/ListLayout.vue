@@ -29,7 +29,10 @@ const props = defineProps<{
 .list-content-wrapper {
   background-color: var(--component-bg);
   border-radius: $border-radius-mobile;
-  margin: 1rem;
+
+  @media(min-width: $breakpoint-md) {
+    margin: 1rem;
+  }
 }
 
 .list__list-wrapper {

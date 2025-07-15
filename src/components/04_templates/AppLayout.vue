@@ -4,6 +4,7 @@
 import BottomMenu from "@/components/02_molecules/BottomMenu.vue";
 import PageHeader from "@/components/03_organisms/PageHeader.vue";
 import {useUiStore} from "@/components/00_utilities/stores/uiStore";
+import ProfileLink from "@/components/01_atoms/ProfileLink.vue";
 
 const uiStore = useUiStore();
 </script>
@@ -14,7 +15,7 @@ const uiStore = useUiStore();
 <!--        language switch-->
     </header>
     <main class="layout-grid">
-      <p>Profile</p>
+      <ProfileLink/>
       <PageHeader/>
       <slot/>
     </main>
@@ -27,13 +28,19 @@ const uiStore = useUiStore();
 <style lang="scss" scoped>
 
 .layout-grid {
+  display: flex;
+  flex-direction: column;
+  margin: $spacer;
+  gap: 2rem;
+
   @media(min-width: $breakpoint-md) {
     margin-top: 4rem;
     display: grid;
-    grid-template-columns: .5fr 1.5fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: min-content 1.5fr;
+    grid-template-rows: min-content auto;
     align-items: flex-start;
     grid-gap: 4rem;
+    margin-left: 4rem;
 
     &::v-deep(.list-content-wrapper) {
       display: contents;
