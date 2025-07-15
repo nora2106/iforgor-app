@@ -44,7 +44,6 @@ function openSettings() {
 </script>
 
 <template>
-    <p v-if="!lists || lists.length === 0">{{ t('list.no-lists', {type: listType}) }}</p>
     <ListWrapper>
       <router-link class="list-item__link" v-for="list in lists" :to="'/list/' + list.id" :key="list.id">
         <ListPreview>
@@ -52,6 +51,7 @@ function openSettings() {
         </ListPreview>
       </router-link>
     </ListWrapper>
+    <p v-if="!lists || lists.length === 0">{{ t('list.no-lists', {type: listType}) }}</p>
     <AddListOverlay @submit="addNewList" :close="toggleAddListOverlay" v-show="openOverlay"/>
 </template>
 

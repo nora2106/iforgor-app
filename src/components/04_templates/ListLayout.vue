@@ -3,6 +3,8 @@
 <script setup lang="ts">
 import TabSelector from "@/components/02_molecules/TabSelector.vue";
 import {ListType} from "@/components/00_utilities/types/list";
+import {useUiStore} from "@/components/00_utilities/stores/uiStore";
+import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
 
 const props = defineProps<{
   showTabs: boolean,
@@ -10,6 +12,7 @@ const props = defineProps<{
   title: string,
   options?: { name: string; value: ListType }[]
 }>();
+const uiStore = useUiStore();
 
 </script>
 
@@ -19,6 +22,16 @@ const props = defineProps<{
       <TabSelector v-if="showTabs" @select="props.selection" :options="options"/>
     </div>
     <div class="list__list-wrapper">
+      <!-- @todo add search feature and search button component -->
+      <div class="list__list-buttons">
+        <div v-if="uiStore.activeContext === 'overview'" class="list-search">
+          <ButtonIcon :action="uiStore.toggleSettings" icon="ion:search"/>
+        </div>
+        <ButtonIcon v-if="uiStore.activeContext !== 'overview' && (uiStore.activeListType === 'task' || uiStore.activeListType === 'shopping')" :action="uiStore.toggleAddUserOverlay" icon="ph:plus-bold"/>
+        <!-- @todo add recipe edit -->
+        <ButtonIcon v-if="uiStore.activeContext !== 'overview' && uiStore.activeListType === 'recipe'" :action="uiStore.toggleSettings" icon="solar:settings-bold"/>
+        <ButtonIcon :action="uiStore.toggleSettings" icon="solar:settings-bold"/>
+      </div>
       <slot/>
     </div>
   </div>
@@ -48,6 +61,33 @@ const props = defineProps<{
     background-color: var(--component-bg);
     max-width: 65rem;
     align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+}
+
+.list__list-buttons {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  gap: $spacer;
+
+  button {
+    display: none;
+  }
+
+  @media(min-width: $breakpoint-md) {
+    align-self: auto;
+
+    button {
+      display: block;
+    }
+  }
+}
+
+.list-search {
+  button {
+    display: block !important;
   }
 }
 

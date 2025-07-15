@@ -15,7 +15,7 @@
   flex-direction: column;
   align-items: center;
   gap: $spacer;
-  width: 85%;
+  width: 100%;
   max-width: $max-content-with-mobile;
   padding: 0;
 }

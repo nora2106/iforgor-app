@@ -27,7 +27,7 @@ export const useUiStore = defineStore('ui', () => {
 
     const addUserOverlayOpen = ref(false);
     function toggleAddUserOverlay() {
-        settingsOpen.value = !addUserOverlayOpen;
+        addUserOverlayOpen.value = !addUserOverlayOpen;
     }
 
     const currentListOverview = ref<{
