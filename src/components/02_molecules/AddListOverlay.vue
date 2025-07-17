@@ -23,13 +23,12 @@
 
 <template>
     <div>
-<!--      <h3>Neue Liste hinzufügen</h3>-->
       <input v-model="name" type="text" placeholder="Name"/>
       <Button :action="sendValue">Erstellen</Button>
       <p>{{errorMessage}}</p>
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

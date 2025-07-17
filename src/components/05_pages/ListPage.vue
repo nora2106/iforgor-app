@@ -30,27 +30,25 @@
     openAddOverlay.value = !openAddOverlay.value;
   }
 
-  const buttons: MobileMenuButtons = [{icon: 'mdi:user-add', label: 'add-user', onClick: uiStore.toggleAddUserOverlay}, {icon: 'ph:plus-bold', label: 'add', onClick: toggleAddOverlay }, {icon: 'solar:settings-bold', label: 'settings', onClick: uiStore.toggleSettings}]
-
-  uiStore.setMobileButtons(buttons);
-  uiStore.setActiveContext("list");
-
-  if(list && type) {
-    // @todo show tabs if collaboration
-    // showTabs = true;
-
-    uiStore.setCurrentListData( `item-${type}`, list.name, list.items.length, store.getCompletedItemCount(list.id).value);
-  }
-
   const addItem = (text: string) => {
     if(list) {
       store.addItemToList(list.id, text);
     }
   }
+
+  if(list && type) {
+    // @todo show tabs if collaboration
+    // showTabs = true;
+    uiStore.setCurrentListData( `item-${type}`, list.name, list.items.length, store.getCompletedItemCount(list.id).value);
+  }
+
+  const buttons: MobileMenuButtons = [{icon: 'mdi:user-add', label: 'add-user', onClick: uiStore.toggleAddUserOverlay}, {icon: 'ph:plus-bold', label: 'add', onClick: toggleAddOverlay }, {icon: 'solar:settings-bold', label: 'settings', onClick: uiStore.toggleSettings}]
+  uiStore.setMobileButtons(buttons);
+  uiStore.setActiveContext("list");
 </script>
 
 <template>
-  <ListLayout :showTabs="showTabs" :selection="selectTaskTab" :options="tabOptions" :title="list.name">
+  <ListLayout @toggleAdd="toggleAddOverlay" :showTabs="showTabs" :selection="selectTaskTab" :options="tabOptions" :title="list.name">
     <TaskList v-if="type === 'task'" :list="list"/>
     <ShoppingList v-if="type === 'shopping'" :list="list"/>
     <AddListOverlay @submit="addItem" :close="toggleAddOverlay" v-show="openAddOverlay"/>

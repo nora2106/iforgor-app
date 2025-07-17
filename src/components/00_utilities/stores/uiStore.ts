@@ -35,6 +35,7 @@ export const useUiStore = defineStore('ui', () => {
         title: string
         count: number,
     }>({type: 'task', title: '', count: 0})
+
     function setCurrentListOverview(Type: TypeSelection, Title: string, Count: number) {
         currentListOverview.value = {type: Type, title: Title, count: Count};
     }

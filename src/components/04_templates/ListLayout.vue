@@ -12,7 +12,14 @@ const props = defineProps<{
   title: string,
   options?: { name: string; value: ListType }[]
 }>();
+const emit = defineEmits<{
+  (e: 'toggleAdd'): void;
+}>();
 const uiStore = useUiStore();
+
+function toggleOverlay() {
+  emit('toggleAdd');
+}
 
 </script>
 
@@ -27,7 +34,7 @@ const uiStore = useUiStore();
         <div v-if="uiStore.activeContext === 'overview'" class="list-search">
           <ButtonIcon :action="uiStore.toggleSettings" icon="ion:search"/>
         </div>
-        <ButtonIcon v-if="uiStore.activeContext !== 'overview' && (uiStore.activeListType === 'task' || uiStore.activeListType === 'shopping')" :action="uiStore.toggleAddUserOverlay" icon="ph:plus-bold"/>
+        <ButtonIcon v-if="uiStore.activeContext === 'overview' || (uiStore.activeListType === 'task' || uiStore.activeListType === 'shopping')" :action="toggleOverlay" icon="ph:plus-bold"/>
         <!-- @todo add recipe edit -->
         <ButtonIcon v-if="uiStore.activeContext !== 'overview' && uiStore.activeListType === 'recipe'" :action="uiStore.toggleSettings" icon="solar:settings-bold"/>
         <ButtonIcon :action="uiStore.toggleSettings" icon="solar:settings-bold"/>

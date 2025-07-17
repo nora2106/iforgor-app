@@ -4,11 +4,11 @@
 </script>
 
 <template>
-  <div class="profile-wrapper">
+  <router-link to="/profile" class="profile-wrapper">
     <div class="profile-container">
       <Icon icon="ix:user-profile-filled"/>
     </div>
-  </div>
+  </router-link>
 
 </template>
 
