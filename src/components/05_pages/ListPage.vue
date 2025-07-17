@@ -21,6 +21,7 @@
   let showTabs = false;
   const tabOptions: {name: string; value: string}[] = [{name: i18n.t("tabs.all-tasks"), value: "allTasks"}, {name: i18n.t("tabs.assigned"), value: "assignedTasks"}]
   const openAddOverlay = ref<boolean>(false)
+  const openShareOverlay = ref<boolean>(false)
 
   const selectTaskTab = (value: string) => {
     // select either all tasks or assigned tasks (if collaboration)
@@ -28,6 +29,11 @@
 
   const toggleAddOverlay = () => {
     openAddOverlay.value = !openAddOverlay.value;
+  }
+
+  const toggleShareOverlay = () => {
+    openShareOverlay.value = !openShareOverlay.value;
+    console.log('open share')
   }
 
   const addItem = (text: string) => {
@@ -48,7 +54,7 @@
 </script>
 
 <template>
-  <ListLayout @toggleAdd="toggleAddOverlay" :showTabs="showTabs" :selection="selectTaskTab" :options="tabOptions" :title="list.name">
+  <ListLayout @toggleShare="toggleShareOverlay" @toggleAdd="toggleAddOverlay" :showTabs="showTabs" :selection="selectTaskTab" :options="tabOptions" :title="list.name">
     <TaskList v-if="type === 'task'" :list="list"/>
     <ShoppingList v-if="type === 'shopping'" :list="list"/>
     <AddListOverlay @submit="addItem" :close="toggleAddOverlay" v-show="openAddOverlay"/>

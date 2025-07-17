@@ -23,6 +23,7 @@
     width: 100%;
     min-width: 12rem;
     right: 0;
+    grid-column: 1;
   }
 }
 

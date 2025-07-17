@@ -12,7 +12,6 @@ const uiStore = useUiStore();
 <template>
   <div class="app-layout">
     <header>
-<!--        language switch-->
     </header>
     <main class="layout-grid">
       <ProfileLink/>
@@ -36,7 +35,7 @@ const uiStore = useUiStore();
   @media(min-width: $breakpoint-md) {
     margin-top: 4rem;
     display: grid;
-    grid-template-columns: min-content 1.5fr;
+    grid-template-columns: min-content minmax(auto, $max-content-with-desktop) min-content;
     grid-template-rows: min-content auto;
     align-items: flex-start;
     grid-gap: 4rem;

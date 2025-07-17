@@ -5,6 +5,8 @@ import TabSelector from "@/components/02_molecules/TabSelector.vue";
 import {ListType} from "@/components/00_utilities/types/list";
 import {useUiStore} from "@/components/00_utilities/stores/uiStore";
 import ButtonIcon from "@/components/01_atoms/ButtonIcon.vue";
+import ShareLink from "@/components/01_atoms/ShareLink.vue";
+import {computed} from "vue";
 
 const props = defineProps<{
   showTabs: boolean,
@@ -14,11 +16,16 @@ const props = defineProps<{
 }>();
 const emit = defineEmits<{
   (e: 'toggleAdd'): void;
+  (e: 'toggleShare'): void;
 }>();
 const uiStore = useUiStore();
 
 function toggleOverlay() {
   emit('toggleAdd');
+}
+
+function toggleShareOverlay() {
+  emit('toggleShare');
 }
 
 </script>
@@ -41,6 +48,7 @@ function toggleOverlay() {
       </div>
       <slot/>
     </div>
+    <ShareLink @open-overlay="toggleShareOverlay" v-if="uiStore.activeContext !== 'overview'"/>
   </div>
 </template>
 
@@ -63,10 +71,11 @@ function toggleOverlay() {
   align-items: center;
   border-radius: $border-radius-mobile;
   padding: 2rem;
+  grid-column: 2;
 
   @media(min-width: $breakpoint-md) {
     background-color: var(--component-bg);
-    max-width: 65rem;
+    max-width: $max-content-with-desktop;
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: row-reverse;
@@ -114,7 +123,7 @@ function toggleOverlay() {
   @media(min-width: $breakpoint-md) {
     background-color: var(--component-bg);
     max-width: 16rem;
+    grid-column: 1;
   }
 }
-
 </style>

@@ -53,8 +53,9 @@ let infoText = computed(() => {
   @media(min-width: $breakpoint-md) {
     background-color: var(--component-bg);
     padding: 1.5rem 2rem;
-    max-width: 65rem;
+    max-width: $max-content-with-desktop;
     width: 100%;
+    grid-column: 2;
   }
 }
 

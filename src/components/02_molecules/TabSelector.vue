@@ -41,6 +41,7 @@
     padding: 2rem 1rem;
     margin: 0;
     min-width: 12rem;
+    grid-column: 1;
   }
 }
 
